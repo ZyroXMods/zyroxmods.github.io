@@ -107,6 +107,12 @@
 }
 .fa-spin { color: #ffcc00 !important; } /* Spinner color */
         
+/* Disabled step ko lagi style */
+.step-item.disabled {
+    opacity: 0.5;
+    pointer-events: none; /* Yesle click garna dindaina */
+    filter: grayscale(1);
+}
         
         footer { padding: 20px 0 30px; text-align: center; border-top: 1px solid #242b38; margin-top: 10px; }
         .footer-text { color: #4e5d78; font-size: 0.55rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
@@ -303,37 +309,65 @@
             }
         };
 
-        // --- 5 SECOND TIMER LOGIC ---
-        let status = { s1: false, s2: false, s3: false };
+// --- SUB4UNLOCK SEQUENTIAL LOGIC ---
+let status = { s1: false, s2: false, s3: false };
 
-        function setupTimerStep(btnId, iconId, key) {
-            const btn = document.getElementById(btnId);
-            const icon = document.getElementById(iconId);
-            btn.onclick = () => {
-                if (status[key]) return;
-                icon.className = "fas fa-spinner fa-spin";
-                setTimeout(() => {
-                    status[key] = true;
-                    btn.classList.add('done');
-                    icon.className = "fas fa-check-circle";
-                    checkVerification();
-                }, 5000);
-            };
-        }
+function updateSteps() {
+    const s1 = document.getElementById('s1-btn');
+    const s2 = document.getElementById('s2-btn');
+    const s3 = document.getElementById('videoTask');
 
-        setupTimerStep('s1-btn', 's1-icon', 's1');
-        setupTimerStep('s2-btn', 's2-icon', 's2');
-        setupTimerStep('videoTask', 's3-icon', 's3');
+    // Default: S2 ra S3 lai lock garne
+    s2.classList.add('disabled');
+    s3.classList.add('disabled');
 
-        function checkVerification() {
-            if (status.s1 && status.s2 && status.s3) {
-                const fBtn = document.getElementById('finalUnlock');
-                fBtn.disabled = false;
-                fBtn.classList.add('active');
-                fBtn.innerText = "GET DOWNLOAD LINK NOW";
-            }
-        }
+    // Yedi S1 done bhayo bhane S2 kholne
+    if (status.s1) {
+        s2.classList.remove('disabled');
+    }
+    // Yedi S2 done bhayo bhane S3 kholne
+    if (status.s2) {
+        s3.classList.remove('disabled');
+    }
+}
 
+function setupTimerStep(btnId, iconId, key) {
+    const btn = document.getElementById(btnId);
+    const icon = document.getElementById(iconId);
+    
+    btn.onclick = (e) => {
+        if (status[key]) return;
+        
+        icon.className = "fas fa-spinner fa-spin";
+        
+        // 5 Second Timer
+        setTimeout(() => {
+            status[key] = true;
+            btn.classList.add('done');
+            icon.className = "fas fa-check-circle";
+            
+            updateSteps(); // Check garne kun task kholne
+            checkVerification();
+        }, 5000);
+    };
+}
+
+// Suru ma steps setup garne
+setupTimerStep('s1-btn', 's1-icon', 's1');
+setupTimerStep('s2-btn', 's2-icon', 's2');
+setupTimerStep('videoTask', 's3-icon', 's3');
+
+// First time load huda step lock garna
+updateSteps(); 
+
+function checkVerification() {
+    if (status.s1 && status.s2 && status.s3) {
+        const fBtn = document.getElementById('finalUnlock');
+        fBtn.disabled = false;
+        fBtn.classList.add('active');
+        fBtn.innerText = "GET DOWNLOAD LINK NOW";
+    }
+}
         // NAYA USER ko lagi Final Unlock (Direct)
         document.getElementById('finalUnlock').onclick = () => {
             localStorage.setItem('zyrox_verified', 'true');
