@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZyroX Mods | Home</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LQ5457YBSF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LQ5457YBSF');
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        body { background-color: #1a1e29; color: #ffffff; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
+
+        .container { width: 100%; max-width: 430px; padding: 15px; display: flex; flex-direction: column; min-height: 100vh; position: relative; }
+        .content-wrap { flex: 1; }
+
+        /* Header with Shadow Line */
+        .header-nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 10px 5px; 
+            margin-bottom: 20px; 
+            position: relative; 
+            z-index: 2000; 
+            background: #1a1e29;
+            border-bottom: 2px solid rgba(255, 77, 77, 0.3); /* ZyroX Mods को मुनि Shadow Line */
+        }
+        .header-nav h1 { font-size: 1.6rem; font-weight: 800; color: #ff4d4d; letter-spacing: -0.5px; cursor: pointer; }
+        .menu-btn { font-size: 1.4rem; color: #fff; cursor: pointer; padding: 8px; }
+
+        /* Updated Overlap Menu Style */
+        .nav-overlay {
+            position: absolute; 
+            top: 80px; 
+            left: 0; 
+            width: 100%; 
+            height: 0;
+            background: #1a1e29; 
+            z-index: 1500; 
+            overflow: hidden;
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none;
+        }
+        .nav-overlay.active { 
+            height: 250px; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+            pointer-events: auto; 
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #5c6b89;
+            font-size: 1.15rem;
+            margin: 9px 0;
+            font-weight: 500;
+            width: 100%;
+            text-align: center;
+            padding: 5px 0;
+            cursor: pointer;
+        }
+        .nav-item.active-link { color: #ffffff; }
+        .nav-item.active-link span { border-bottom: 2px solid #ff4d4d; padding-bottom: 2px; }
+
+        /* Search */
+                /* Search & Suggestions Style */
+        .search-area { position: relative; margin-bottom: 25px; }
+        .search-box { padding: 0 5px; }
+        .search-box input { 
+            width: 100%; background: #242b38; border: none; 
+            padding: 10px 15px; border-radius: 12px; color: #fff; 
+            font-size: 0.95rem; outline: none; text-align: left;
+        }
+        .suggestions-box {
+            position: absolute; top: 105%; left: 5px; right: 5px; 
+            background: #242b38; border-radius: 12px; display: none; 
+            flex-direction: column; z-index: 5000; border: 1px solid rgba(255,255,255,0.05); 
+            overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .suggestion-item { padding: 12px 15px; font-size: 0.9rem; color: #cfd8dc; cursor: pointer; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.02); }
+
+                /* App Cards */
+        .app-list { display: flex; flex-direction: column; gap: 32px; padding-bottom: 30px; }
+        .app-card { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 12px; transition: 0.2s; }
+        .thumb { width: 100%; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; background: #000; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .info { padding: 0 5px; text-align: center; }
+        .info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; color: #cfd8dc; }
+        
+        .meta-data { display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 0.75rem; color: #8e99ab; }
+        .meta-item i { color: #ff4d4d; font-size: 0.8rem; }
+        
+        /* Color Fixed Footer */
+footer { 
+    padding: 20px 0 3px; 
+    text-align: center; 
+    border-top: 1px solid #242b38; /* Border color match gareko */
+    margin-top: auto; 
+}
+
+.social-icons { 
+    display: flex; 
+    justify-content: center; 
+    gap: 18px; 
+    margin-bottom: 12px; 
+}
+
+.icon-circle { 
+    width: 42px; 
+    height: 42px; 
+    background: #242b38; /* Dark blue background */
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    color: #fff; 
+    text-decoration: none; 
+    border: 1px solid rgba(255, 77, 77, 0.2); /* Reddish subtle border */
+    font-size: 1.1rem; 
+    transition: 0.3s;
+}
+
+/* Hover garda Red hune effect */
+.icon-circle:hover {
+    color: #ff4d4d;
+    border-color: #ff4d4d;
+}
+
+.footer-text { 
+    color: #4e5d78; /* Soft blue-grey for text */
+    font-size: 0.55rem; 
+    font-weight: 800; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+}
+        
+        /* FIX: display: none thapidiyeko chhu */
+        .overlay-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; z-index: 1400; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-wrap">
+            <div class="header-nav">
+                <h1 onclick="window.location.reload()">ZyroX Mods</h1>
+                <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars" id="menuIcon"></i></div>
+            </div>
+
+            <nav class="nav-overlay" id="navMenu">
+                <a href="index.html" class="nav-item active-link" onclick="setActive(this)"><span>Home</span></a>
+                <a href="https://youtube.com/@zyroxmodder" class="nav-item" onclick="setActive(this)"><span>YouTube</span></a>
+                <a href="https://t.me/ZyroXMods" class="nav-item" onclick="setActive(this)"><span>Join Telegram</span></a>
+                <a href="#" class="nav-item" onclick="setActive(this)"><span>Premium</span></a>
+                <a href="Ajaya.html" class="nav-item" onclick="setActive(this)"><span>Contact us</span></a>
+            </nav>
+            
+             <div class="search-area">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search" onkeyup="handleSearch()" autocomplete="off">
+                </div>
+                <div id="suggestionBox" class="suggestions-box"></div>
+             </div>
+
+            <div class="app-list" id="appList"></div>
+        </div>
+
+          <footer>
+            <div class="social-icons">
+                <a href="https://youtube.com/@zyroxmodder" class="icon-circle"><i class="fab fa-youtube"></i></a>
+                <a href="https://t.me/ZyroXMods" class="icon-circle"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+            <div class="footer-text">© 2026 ZYROX MODS • PREMIUM</div>
+        </footer>
+    </div>
+
+    <div class="overlay-bg" id="overlayBg" onclick="toggleMenu()"></div>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDtMTEiAyhletlmv8oPmHA2taR38LVqF9Y",
+            authDomain: "zyrox-mods.firebaseapp.com",
+            databaseURL: "https://zyrox-mods-default-rtdb.firebaseio.com",
+            projectId: "zyrox-mods",
+            storageBucket: "zyrox-mods.firebasestorage.app",
+            messagingSenderId: "1036623690767",
+            appId: "1:1036623690767:web:9ab5f015a3cb0b078d777a"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        
+        const mods = [
+            { id: "frag", name: "Frag Pro Shooter", version: "4.20.0", type: "Action", c_icon: "fa-gun", v_icon: "fa-code-branch", img: "fragh.jpg" },
+            { id: "subway", name: "Subway Surfers", version: "3.2.1", type: "Arcade", c_icon: "fa-gamepad", v_icon: "fa-code-branch", img: "subwayh.png" }
+        ];
+
+        function loadMods(data = mods) {
+            const list = document.getElementById('appList');
+            list.innerHTML = data.map(mod => `
+                <a href="games.html?id=${mod.id}" class="app-card">
+                    <div class="thumb">
+                        <img src="${mod.img}" onerror="this.src='https://via.placeholder.com/400x225/111/ff4d4d?text=${mod.name}'">
+                    </div>
+                    <div class="info">
+                        <h3 class="app-name">${mod.name}</h3>
+                        <div class="meta-data">
+                            <div class="meta-item"><i class="fas ${mod.v_icon}"></i> v${mod.version}</div>•
+                            <div class="meta-item"><i class="fas ${mod.c_icon}"></i> ${mod.type}</div>•
+                            <div class="meta-item"><i class="fas fa-download"></i> <span id="count-${mod.id}">0</span></div>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+
+            // Listen to Firebase for live count updates
+            data.forEach(mod => {
+                database.ref('downloads/' + mod.id).on('value', (s) => {
+                    const count = s.val() || 0;
+                    const el = document.getElementById('count-' + mod.id);
+                    if(el) el.innerText = count.toLocaleString();
+                });
+            });
+        }
+
+        function handleSearch() {
+    let val = document.getElementById('searchInput').value.toLowerCase();
+    const box = document.getElementById('suggestionBox');
+
+    if (!val) {
+        box.style.display = 'none';
+        loadMods(mods);
+        return;
+    }
+
+    // 1. Search sanga match hune mods filter garne
+    let filtered = mods.filter(m => m.name.toLowerCase().includes(val));
+
+    // 2. Count ko aadhar ma Sort garne (Highest count mathi aauchha)
+    filtered.sort((a, b) => {
+        const countA = parseInt(document.getElementById('count-' + a.id)?.innerText.replace(/,/g, '') || 0);
+        const countB = parseInt(document.getElementById('count-' + b.id)?.innerText.replace(/,/g, '') || 0);
+        return countB - countA; 
+    });
+
+    // 3. Suggestions display garne
+    if (filtered.length > 0) {
+        box.innerHTML = filtered.map(m => {
+            const liveCount = document.getElementById('count-' + m.id)?.innerText || '0';
+            return `
+                <div class="suggestion-item" onclick="selectSuggestion('${m.name}')" 
+                     style="display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; cursor: pointer;">
+                    <span>
+                        <i class="fas fa-search" style="font-size:0.75rem; color:#8e99ab; margin-right: 8px;"></i> ${m.name}
+                    </span>
+                    <span style="font-size: 0.7rem; color: #ff4d4d; font-weight: 700;">
+                        <i class="fas fa-fire"></i> ${liveCount}
+                    </span>
+                </div>
+            `;
+        }).join('');
+        box.style.display = 'flex';
+    } else {
+        box.style.display = 'none';
+    }
+    loadMods(filtered);
+}
+
+function selectSuggestion(name) {
+    document.getElementById('searchInput').value = name;
+    document.getElementById('suggestionBox').style.display = 'none';
+    handleSearch();
+}
+
+loadMods();
+
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            const bg = document.getElementById('overlayBg');
+            const icon = document.getElementById('menuIcon');
+            const isActive = menu.classList.toggle('active');
+            
+            // Script vitra ko display logic fix
+            bg.style.display = isActive ? 'block' : 'none';
+            
+            if (isActive) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        }
+
+        function setActive(element) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active-link'));
+            element.classList.add('active-link');
+            setTimeout(toggleMenu, 300);
+        }
+
+          // Close suggestions on outside click
+        window.onclick = (e) => {
+            if (!e.target.closest('.search-area')) {
+                document.getElementById('suggestionBox').style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

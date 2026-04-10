@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZyroX Mods | Details</title>
+    <script>(function(s){s.dataset.zone='10847627',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        /* Background updated to #1a1e29 to match Home */
+        body { background-color: #1a1e29; color: #ffffff; display: flex; justify-content: center; min-height: 100vh; }
+        .container { width: 100%; max-width: 430px; }
+
+        /* --- NAV --- */
+        .nav-bar { padding: 15px 20px; display: flex; justify-content: flex-end; }
+        .exit-btn { color: #ff4d4d; text-decoration: none; font-size: 1.4rem; cursor: pointer; }
+
+        /* --- HEADER & MOD BADGE --- */
+        .app-header { padding: 0 20px 25px; display: flex; gap: 20px; align-items: center; }
+        
+        .icon-wrapper { position: relative; display: inline-block; flex-shrink: 0; }
+        .app-icon { width: 100px; height: 100px; border-radius: 22px; border: 1px solid #242b38; object-fit: cover; background: #000; }
+        
+        .mod-badge {
+            position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+            background: #ff4d4d; color: #fff; font-size: 0.65rem; font-weight: 900;
+            padding: 3px 14px; border-radius: 20px; text-transform: uppercase;
+            border: 2px solid #1a1e29; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .header-content { display: flex; flex-direction: column; justify-content: center; }
+        .app-name { font-size: 1.3rem; font-weight: 700; line-height: 1.1; margin-bottom: 5px; }
+        
+        .meta-row { display: flex; align-items: center; gap: 12px; color: #8e99ab; font-size: 0.72rem; font-weight: 500; margin-bottom: 12px; flex-wrap: wrap; }
+        .meta-item { display: flex; align-items: center; gap: 4px; }
+        .meta-row i { color: #ff4d4d; font-size: 0.75rem; }
+
+        .action-row { display: flex; align-items: center; gap: 12px; }
+        .get-btn { background: #ff4d4d; color: #fff; text-decoration: none; padding: 6px 28px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; transition: 0.2s; cursor: pointer; border: none; }
+        .get-btn:active { transform: scale(0.95); background: #cc3d3d; }
+        
+        .header-icon-circle { width: 32px; height: 32px; background: #242b38; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #ff4d4d; font-size: 0.8rem; text-decoration: none; }
+
+        /* --- SECTIONS --- */
+        .section-title { display: flex; align-items: center; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; padding: 25px 20px 12px; letter-spacing: 0.5px; color: #cfd8dc; }
+        .section-title::before { content: ''; width: 3.5px; height: 16px; background: #ff4d4d; margin-right: 10px; border-radius: 2px; }
+
+        .separator { border: none; height: 1px; background-color: #242b38; margin: 0 20px; }
+
+        .preview-container { padding: 0 20px 5px; }
+        .video-card { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 18px; overflow: hidden; border: 1px solid #242b38; }
+
+        .cards-container { padding: 0 20px 25px; display: flex; flex-direction: column; gap: 10px; }
+        .action-card { background: #242b38; border: 1px solid rgba(255,255,255,0.05); padding: 12px 18px; border-radius: 18px; display: flex; align-items: center; gap: 15px; text-decoration: none; color: #fff; transition: 0.2s; }
+
+        .icon-box { width: 38px; height: 38px; background: #1a1e29; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 0.9rem; flex-shrink: 0; }
+        .card-text h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 1px; }
+        .card-text p { font-size: 0.7rem; color: #8e99ab; line-height: 1.2; }
+
+        /* RECOMMENDED LIST */
+        .recommend-section { padding: 0 20px 30px; }
+        .recommend-item { display: flex; align-items: center; gap: 15px; text-decoration: none; color: #fff; margin-bottom: 18px; transition: 0.2s; }
+        .recommend-item:active { transform: scale(0.98); opacity: 0.8; }
+        .recommend-thumb { width: 110px; height: 65px; border-radius: 12px; object-fit: cover; background: #000; border: 1px solid #242b38; flex-shrink: 0; }
+        .recommend-info h3 { font-size: 0.85rem; font-weight: 600; line-height: 1.3; color: #ffffff; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .recommend-info h3 span { color: #ff4d4d; }
+        
+/* Sub4Unlock Advanced Overlay */
+.lock-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 12, 18, 0.99); z-index: 10000;
+    display: none; align-items: center; justify-content: center; backdrop-filter: blur(15px);
+}
+.lock-box { 
+    background: #1a1e29; padding: 25px; border-radius: 28px; 
+    width: 92%; max-width: 380px; text-align: center; 
+    border: 1px solid rgba(255, 77, 77, 0.2); 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.8); 
+}
+.lock-box h2 { font-size: 1.2rem; font-weight: 800; color: #fff; text-transform: uppercase; margin-bottom: 5px; }
+.top-desc { font-size: 0.75rem; color: #8e99ab; margin-bottom: 20px; }
+
+.step-item {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #242b38; padding: 15px; border-radius: 16px;
+    text-decoration: none; color: #fff; margin-bottom: 12px; 
+    border: 1px solid transparent; transition: 0.3s;
+}
+.step-item.done { border-color: #34c759; background: #1b2621; pointer-events: none; }
+.step-item i { color: #ff4d4d; font-size: 1.1rem; }
+.step-item.done i { color: #34c759; }
+
+.unlock-btn {
+    width: 100%; padding: 16px; border-radius: 16px; border: none;
+    background: #2d3544; color: #ffffff50; font-weight: 800; 
+    cursor: not-allowed; margin-top: 10px; transition: 0.4s;
+}
+.unlock-btn.active { background: #34c759; color: #fff; cursor: pointer; opacity: 1; box-shadow: 0 8px 20px rgba(52, 199, 89, 0.4); }
+
+.bottom-note { 
+    margin-top: 20px; padding-top: 15px; border-top: 1px solid #242b38; 
+    font-size: 0.65rem; color: #6b7a94; line-height: 1.4; text-align: left; 
+}
+.fa-spin { color: #ffcc00 !important; } /* Spinner color */
+        
+        
+        footer { padding: 20px 0 30px; text-align: center; border-top: 1px solid #242b38; margin-top: 10px; }
+        .footer-text { color: #4e5d78; font-size: 0.55rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="nav-bar">
+            <a href="index.html" class="exit-btn"><i class="fas fa-times"></i></a>
+        </div>
+
+        <div class="app-header">
+            <div class="icon-wrapper">
+                <img id="icon" src="" alt="Icon" class="app-icon">
+                <div class="mod-badge">MOD</div>
+            </div>
+            <div class="header-content">
+                <h1 id="name" class="app-name">Loading...</h1>
+                
+                <div class="meta-row">
+                    <div class="meta-item">
+                        <i class="fas fa-code-branch"></i> <span id="version">v1.0</span>
+                    </div>
+                    <div class="meta-item">
+                        <i id="catIcon" class="fas fa-gamepad"></i> <span id="category">Games</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-download"></i> <span id="downloadCount">0</span>
+                    </div>
+                </div>
+
+                <div class="action-row">
+                    <a href="#" id="mainDownloadBtn" class="get-btn">GET</a>
+                    <a href="https://youtube.com/@ZyroXModder" class="header-icon-circle"><i class="fas fa-play"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="separator">
+
+        <h2 class="section-title" id="videoSection">Gameplay Preview</h2>
+        <div class="preview-container">
+            <div class="video-card">
+                <iframe id="video" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <h2 class="section-title">How To Use?</h2>
+        <div class="cards-container">
+            <a href="#" id="cardDownloadBtn" class="action-card">
+                <div class="icon-box" style="color: #ff4d4d;"><i class="fas fa-cloud-download-alt"></i></div>
+                <div class="card-text">
+                    <h3>Download APK</h3>
+                    <p>Get the latest modded version safely.</p>
+                </div>
+            </a>
+            <a href="https://t.me/ZyroXModder" class="action-card">
+                <div class="icon-box" style="color: #ffcc00;"><i class="fab fa-telegram-plane"></i></div>
+                <div class="card-text">
+                    <h3>Telegram Channel</h3>
+                    <p>Join for instant updates and news.</p>
+                </div>
+            </a>
+            <a href="https://t.me/ZyroXModder" class="action-card">
+                <div class="icon-box" style="color: #34c759;"><i class="fas fa-bug"></i></div>
+                <div class="card-text">
+                    <h3>Report Bug</h3>
+                    <p>If the mod is not working, let us know.</p>
+                </div>
+            </a>
+        </div>
+
+          <h2 class="section-title">You may like these posts</h2>
+        <div class="recommend-section" id="recommendedContainer">
+        </div>
+
+<div class="lock-overlay" id="lockOverlay">
+    <div class="lock-box">
+        <h2><i class="fas fa-lock" style="color:#ff4d4d;"></i> Link Locked</h2>
+        <p class="top-desc">Complete tasks to support ZyroX Mods</p>
+        
+        <a href="https://youtube.com/@imzyroxmods?sub_confirmation=1" target="_blank" class="step-item" id="s1-btn">
+            <span><i class="fab fa-youtube"></i> Subscribe Channel 1</span>
+            <i class="fas fa-circle-notch" id="s1-icon"></i>
+        </a>
+
+        <a href="https://youtube.com/@zyroxmodder?sub_confirmation=1" target="_blank" class="step-item" id="s2-btn">
+            <span><i class="fab fa-youtube"></i> Subscribe Channel 2</span>
+            <i class="fas fa-circle-notch" id="s2-icon"></i>
+        </a>
+
+        <a href="#" id="videoTask" target="_blank" class="step-item">
+            <span><i class="fas fa-thumbs-up"></i> Like & Comment Video</span>
+            <i class="fas fa-circle-notch" id="s3-icon"></i>
+        </a>
+
+        <button class="unlock-btn" id="finalUnlock" disabled>FINISH ALL STEPS</button>
+
+        <div class="bottom-note">
+            <b>NOTE:</b> After clicking, stay on the page for 5 seconds. Verification happens automatically. Do not close the tab instantly!
+        </div>
+    </div>
+</div>
+        
+        
+        <footer>
+            <div class="footer-text">© 2026 ZYROX MODS • PREMIUM</div>
+        </footer>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+    <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDtMTEiAyhletlmv8oPmHA2taR38LVqF9Y",
+        authDomain: "zyrox-mods.firebaseapp.com",
+        databaseURL: "https://zyrox-mods-default-rtdb.firebaseio.com",
+        projectId: "zyrox-mods",
+        storageBucket: "zyrox-mods.firebasestorage.app",
+        messagingSenderId: "1036623690767",
+        appId: "1:1036623690767:web:9ab5f015a3cb0b078d777a",
+        measurementId: "G-B4GFTPGZMB"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    const gameData = {
+        "frag": { name: "Frag Pro Shooter", version: "4.20.0", type: "Action", c_icon: "fa-gun", img: "fragd.png", vid: "l0yLnIXHgpE", dl: "https://99links.in/xjiy0W0" },
+        "subway": { name: "Subway Surfers", version: "3.2.1", type: "Arcade", c_icon: "fa-gamepad", img: "subway.png", vid: "another_vid", dl: "wtf.html" }
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    const game = gameData[id];
+
+        if(game) {
+        document.getElementById('name').innerText = game.name;
+        document.getElementById('icon').src = game.img;
+        document.getElementById('version').innerText = "v" + game.version;
+        document.getElementById('category').innerText = game.type;
+        document.getElementById('catIcon').className = "fas " + game.c_icon;
+        document.getElementById('video').src = "https://www.youtube.com/embed/" + game.vid;
+        document.title = game.name + " | ZyroX Mods";
+
+        // Recommended Section
+        const recContainer = document.getElementById('recommendedContainer');
+        Object.keys(gameData).forEach(key => {
+            if(key !== id) {
+                const item = gameData[key];
+                recContainer.innerHTML += `
+                    <a href="?id=${key}" class="recommend-item">
+                        <img src="${item.img}" class="recommend-thumb">
+                        <div class="recommend-info">
+                            <h3>${item.name} <span>Mod Menu</span> ${item.version}</h3>
+                        </div>
+                    </a>`;
+            }
+        });
+
+        // --- SUB4UNLOCK TRIGGER ---
+                // --- SUB4UNLOCK TRIGGER & ONE-TIME UNLOCK LOGIC ---
+        const lockOverlay = document.getElementById('lockOverlay');
+
+        const openLock = (e) => {
+            e.preventDefault();
+            
+            // 1. Yadi PAILA NAI VERIFIED CHHA vane (Instant Redirect)
+            if (localStorage.getItem('zyrox_verified') === 'true') {
+                // Pahile Firebase update request pathai halne (Background ma)
+                database.ref('downloads/' + id).transaction(c => (c || 0) + 1);
+                
+                // Bina kunai delay direct redirect garne
+                window.location.href = game.dl;
+                return;
+            }
+
+            // 2. NAYA USER ko lagi: Lock overlay dekhaune
+            lockOverlay.style.display = 'flex';
+            history.pushState({modalOpen: true}, null, "");
+        };
+
+        document.getElementById('mainDownloadBtn').onclick = openLock;
+        document.getElementById('cardDownloadBtn').onclick = openLock;
+        document.getElementById('videoTask').href = "https://youtube.com/watch?v=" + game.vid;
+
+        window.onpopstate = function(event) {
+            if (lockOverlay.style.display === 'flex') {
+                lockOverlay.style.display = 'none';
+            }
+        };
+
+        // --- 5 SECOND TIMER LOGIC ---
+        let status = { s1: false, s2: false, s3: false };
+
+        function setupTimerStep(btnId, iconId, key) {
+            const btn = document.getElementById(btnId);
+            const icon = document.getElementById(iconId);
+            btn.onclick = () => {
+                if (status[key]) return;
+                icon.className = "fas fa-spinner fa-spin";
+                setTimeout(() => {
+                    status[key] = true;
+                    btn.classList.add('done');
+                    icon.className = "fas fa-check-circle";
+                    checkVerification();
+                }, 5000);
+            };
+        }
+
+        setupTimerStep('s1-btn', 's1-icon', 's1');
+        setupTimerStep('s2-btn', 's2-icon', 's2');
+        setupTimerStep('videoTask', 's3-icon', 's3');
+
+        function checkVerification() {
+            if (status.s1 && status.s2 && status.s3) {
+                const fBtn = document.getElementById('finalUnlock');
+                fBtn.disabled = false;
+                fBtn.classList.add('active');
+                fBtn.innerText = "GET DOWNLOAD LINK NOW";
+            }
+        }
+
+        // NAYA USER ko lagi Final Unlock (Direct)
+        document.getElementById('finalUnlock').onclick = () => {
+            localStorage.setItem('zyrox_verified', 'true');
+            database.ref('downloads/' + id).transaction(c => (c || 0) + 1);
+            window.location.href = game.dl;
+        };
+
+        // --- DISPLAY COUNT LOGIC (Strict 3s Delay) ---
+        database.ref('downloads/' + id).on('value', (s) => {
+            const latestCount = (s.val() || 0).toLocaleString();
+            
+            // UI ma 3 second pachi matrai update garne
+            setTimeout(() => {
+                const countElement = document.getElementById('downloadCount');
+                if (countElement) {
+                    countElement.innerText = latestCount;
+                }
+            }, 3000); 
+        });
+
+    } else {
+        window.location.href = "index.html";
+    }
+
+
+</script>
+    <script>(function(s){s.dataset.zone='10546845',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<script>(function(s){s.dataset.zone='10546863',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+        
+</body>
+</html>
