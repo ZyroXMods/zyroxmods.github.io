@@ -341,7 +341,20 @@ loadRecommended();
 
         const openLock = (e) => {
             e.preventDefault();
-            
+        const btn = document.getElementById('mainDownloadBtn');
+    const originalText = btn.innerHTML;
+
+    // 1. Loading State Dekhaune (2 Seconds)
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+    btn.style.pointerEvents = "none"; // Double click rokna
+    btn.style.opacity = "0.8";
+
+    setTimeout(() => {
+        // 2-second pachi reset garne
+        btn.innerHTML = originalText;
+        btn.style.pointerEvents = "auto";
+        btn.style.opacity = "1";
+        
             // 1. Yadi PAILA NAI VERIFIED CHHA vane (Instant Redirect)
             if (localStorage.getItem('zyrox_verified') === 'true') {
                 // Pahile Firebase update request pathai halne (Background ma)
@@ -355,6 +368,7 @@ loadRecommended();
             // 2. NAYA USER ko lagi: Lock overlay dekhaune
             lockOverlay.style.display = 'flex';
             history.pushState({modalOpen: true}, null, "");
+        }, 2000);
         };
 
         document.getElementById('mainDownloadBtn').onclick = openLock;
