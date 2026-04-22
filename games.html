@@ -40,7 +40,25 @@
         .meta-row i { color: #ff4d4d; font-size: 0.75rem; }
 
         .action-row { display: flex; align-items: center; gap: 12px; }
-        .get-btn { background: #ff4d4d; color: #fff; text-decoration: none; padding: 6px 28px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; transition: 0.2s; cursor: pointer; border: none; }
+      /*  .get-btn { background: #ff4d4d; color: #fff; text-decoration: none; padding: 6px 28px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; transition: 0.2s; cursor: pointer; border: none; }*/
+        .get-btn { 
+    background: #ff4d4d; 
+    color: #fff; 
+    text-decoration: none; 
+    padding: 8px 28px; /* Padding ali badhauda click garna sajilo hunxa */
+    border-radius: 20px; 
+    font-weight: 700; 
+    font-size: 0.85rem; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Professional easing */
+    cursor: pointer; 
+    border: none; 
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 110px; /* Loading huda button ko size na-halleos vanera fixed width */
+    gap: 8px; /* Icon ra text ko bix ma gap */
+    box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3); /* Premium look ko lagi shadow */
+        }
         .get-btn:active { transform: scale(0.95); background: #cc3d3d; }
         
         .header-icon-circle { width: 32px; height: 32px; background: #242b38; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #ff4d4d; font-size: 0.8rem; text-decoration: none; }
