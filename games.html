@@ -279,46 +279,61 @@
         document.getElementById('video').src = "https://www.youtube.com/embed/" + game.vid;
         document.title = game.name + " | ZyroX Mods";
 
-         // --- RECOMMENDED SECTION (NAME + MOD MENU TOP | VERSION + DL BELOW) ---
-        const recContainer = document.getElementById('recommendedContainer');       
-        Object.keys(gameData).forEach(key => {
-            if(key !== id) {
-                const item = gameData[key];
-                const countId = `count-${key}`;
+         // --- RECOMMENDED SECTION (SORTED BY DOWNLOADS) ---
+const recContainer = document.getElementById('recommendedContainer');
+async function loadRecommended() {
+    let sortedList = [];
+    // 1. Paila sabai game ko download count fetch garne
+    const promises = Object.keys(gameData).map(async (key) => {
+        const snapshot = await database.ref('downloads/' + key).get();
+        return { key, count: snapshot.val() || 0, ...gameData[key] };
+    });
 
-                recContainer.innerHTML += `
-                    <a href="?id=${key}" class="recommend-item">
-                        <img src="${item.img}" class="recommend-thumb">
-                        <div class="recommend-info">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                                <h3 style="font-size: 0.9rem; font-weight: 700; margin: 0;">${item.name}</h3>
-                                <span style="background: rgba(255, 77, 77, 0.15); color: #ff4d4d; font-size: 0.55rem; font-weight: 900; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid rgba(255, 77, 77, 0.3);">
-                                    Mod Menu
-                                </span>
+    const results = await Promise.all(promises);
+
+    // 2. High count vako lai mathi rakhna Sort garne
+    sortedList = results.sort((a, b) => b.count - a.count);
+
+    // 3. Current page ko game bahek aru lai UI ma dekhau-ne
+    recContainer.innerHTML = ""; // Container clear garne
+    sortedList.forEach(item => {
+        if(item.key !== id) {
+            const countId = `count-${item.key}`;
+            
+            recContainer.innerHTML += `
+                <a href="?id=${item.key}" class="recommend-item">
+                    <img src="${item.img}" class="recommend-thumb">
+                    <div class="recommend-info">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                            <h3 style="font-size: 0.9rem; font-weight: 700; margin: 0;">${item.name}</h3>
+                            <span style="background: rgba(255, 77, 77, 0.15); color: #ff4d4d; font-size: 0.55rem; font-weight: 900; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid rgba(255, 77, 77, 0.3);">
+                                Mod Menu
+                            </span>
+                        </div>
+                        
+                        <div class="meta-row" style="margin: 0; padding: 0; display: flex; gap: 12px; color: #8e99ab;">
+                            <div style="font-size: 0.72rem; font-weight: 600;">
+                                <i class="fas fa-code-branch" style="font-size: 0.65rem; color: #ff4d4d;"></i> v${item.version}
                             </div>
-                            
-                            <div class="meta-row" style="margin: 0; padding: 0; display: flex; gap: 12px; color: #8e99ab;">
-                                <div style="font-size: 0.72rem; font-weight: 600;">
-                                    <i class="fas fa-code-branch" style="font-size: 0.65rem; color: #ff4d4d;"></i> v${item.version}
-                                </div>
-                                <div style="font-size: 0.72rem; font-weight: 600;">
-                                    <i class="fas fa-download" style="font-size: 0.65rem; color: #ff4d4d;"></i> 
-                                    <span id="${countId}">0</span>
-                                </div>
+                            <div style="font-size: 0.72rem; font-weight: 600;">
+                                <i class="fas fa-download" style="font-size: 0.65rem; color: #ff4d4d;"></i> 
+                                <span id="${countId}">${item.count.toLocaleString()}</span>
                             </div>
                         </div>
-                    </a>`;
+                    </div>
+                </a>`;
 
-                // Firebase Real-time Listener
-                database.ref('downloads/' + key).on('value', (snapshot) => {
-                    const count = snapshot.val() || 0;
-                    const element = document.getElementById(countId);
-                    if(element) {
-                        element.innerText = count.toLocaleString();
-                    }
-                });
-            }
-        });
+            // Real-time update ko lagi listener
+            database.ref('downloads/' + item.key).on('value', (s) => {
+                const el = document.getElementById(countId);
+                if(el) el.innerText = (s.val() || 0).toLocaleString();
+            });
+        }
+    });
+}
+
+// Function call garne
+loadRecommended();
 
         // --- SUB4UNLOCK TRIGGER ---
                 // --- SUB4UNLOCK TRIGGER & ONE-TIME UNLOCK LOGIC ---
