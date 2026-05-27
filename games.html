@@ -79,6 +79,84 @@
         .card-text h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 1px; }
         .card-text p { font-size: 0.7rem; color: #8e99ab; line-height: 1.2; }
 
+/* --- NAYA THAPIYEKO ACCORDION STYLES --- */
+.accordion-wrapper {
+    background: #242b38; 
+    border: 1px solid rgba(255,255,255,0.05); 
+    border-radius: 18px;
+    overflow: hidden; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accordion-trigger { 
+    padding: 12px 18px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    cursor: pointer; 
+}
+.accordion-main { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+}
+.chevron-icon { 
+    color: #8e99ab; 
+    font-size: 0.8rem; 
+    transition: transform 0.3s; 
+}
+
+/* Open huda arrow smoothly rotate huna ko lagi */
+.accordion-wrapper.open .chevron-icon { 
+    transform: rotate(180deg); 
+    color: #ff4d4d; 
+}
+
+/* Slide animation logic */
+.accordion-content {
+    max-height: 0; 
+    padding: 0 18px; 
+    transition: all 0.3s ease-out; 
+    opacity: 0;
+    border-top: 1px solid transparent; 
+    background: rgba(26, 30, 41, 0.4);
+}
+.accordion-wrapper.open .accordion-content {
+    max-height: 400px; 
+    padding: 15px 18px; 
+    opacity: 1;
+    border-top: 1px solid rgba(255,255,255,0.05); 
+    overflow-y: auto;
+}
+
+/* Guide bhitra ko step styling */
+.guide-steps { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+}
+.guide-step-item { 
+    display: flex; 
+    gap: 12px; 
+    font-size: 0.78rem; 
+    color: #cfd8dc; 
+    line-height: 1.4; 
+    text-align: left; 
+}
+.step-num { 
+    background: #ff4d4d; 
+    color: #fff; 
+    font-weight: bold; 
+    width: 18px; 
+    height: 18px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    flex-shrink: 0; 
+    font-size: 0.65rem; 
+}
+        
+
         /* RECOMMENDED LIST */
         .recommend-section { padding: 0 20px 30px; }
         .recommend-item { display: flex; align-items: center; gap: 15px; text-decoration: none; color: #fff; margin-bottom: 18px; transition: 0.2s; }
@@ -188,37 +266,60 @@
 
         <hr class="separator">
 
-        <h2 class="section-title" id="videoSection">Gameplay Preview</h2>
-        <div class="preview-container">
-            <div class="video-card">
-                <iframe id="video" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe>
+
+        <h2 class="section-title">Guide & Support</h2>
+<div class="cards-container">
+    
+    <a href="#" id="cardDownloadBtn" class="action-card">
+        <div class="icon-box" style="color: #ff4d4d;"><i class="fas fa-cloud-download-alt"></i></div>
+        <div class="card-text">
+            <h3>Download APK</h3>
+            <p>Get the latest modded version safely.</p>
+        </div>
+    </a>
+
+    <div class="accordion-wrapper" id="howToUseAccordion">
+        <div class="accordion-trigger">
+            <div class="accordion-main">
+                <div class="icon-box" style="color: #ffcc00;"><i class="fas fa-book-open"></i></div>
+                <div class="card-text">
+                    <h3>How To Use?</h3>
+                    <p>Click here to expand guidelines on this page.</p>
+                </div>
+            </div>
+            <div class="chevron-icon"><i class="fas fa-chevron-down"></i></div>
+        </div>
+        <div class="accordion-content">
+            <div class="guide-steps">
+                <div class="guide-step-item">
+                    <div class="step-num">1</div>
+                    <div>Mathi diyeko <b>GET</b> button ma click garera Mod APK file secure server bata download garnuhos.</div>
+                </div>
+                <div class="guide-step-item">
+                    <div class="step-num">2</div>
+                    <div>Yadi purano regular version game device ma chha bhane tyeslai paila <b>Uninstall</b> garnuhos.</div>
+                </div>
+                <div class="guide-step-item">
+                    <div class="step-num">3</div>
+                    <div>Mobile Settings ma gayera <b>"Unknown Sources"</b> allow garnuhos ra downloaded APK install garnuhos.</div>
+                </div>
+                <div class="guide-step-item">
+                    <div class="step-num">4</div>
+                    <div>Game open garnuhos, screen ma overlay icon aauxa, tya bata Mod Option ON garera maja linu-hos!</div>
+                </div>
             </div>
         </div>
+    </div>
 
-        <h2 class="section-title">How To Use?</h2>
-        <div class="cards-container">
-            <a href="#" id="cardDownloadBtn" class="action-card">
-                <div class="icon-box" style="color: #ff4d4d;"><i class="fas fa-cloud-download-alt"></i></div>
-                <div class="card-text">
-                    <h3>Download APK</h3>
-                    <p>Get the latest modded version safely.</p>
-                </div>
-            </a>
-            <a href="https://t.me/ZyroXModder" class="action-card">
-                <div class="icon-box" style="color: #ffcc00;"><i class="fab fa-telegram-plane"></i></div>
-                <div class="card-text">
-                    <h3>Telegram Channel</h3>
-                    <p>Join for instant updates and news.</p>
-                </div>
-            </a>
-            <a href="https://t.me/ZyroXModder" class="action-card">
-                <div class="icon-box" style="color: #34c759;"><i class="fas fa-bug"></i></div>
-                <div class="card-text">
-                    <h3>Report Bug</h3>
-                    <p>If the mod is not working, let us know.</p>
-                </div>
-            </a>
+    <a href="https://t.me/ZyroXModder" class="action-card">
+        <div class="icon-box" style="color: #34c759;"><i class="fas fa-bug"></i></div>
+        <div class="card-text">
+            <h3>Report Bug</h3>
+            <p>If the mod is not working, let us know.</p>
         </div>
+    </a>
+</div>
+        
 
           <h2 class="section-title">You may like these posts</h2>
         <div class="recommend-section" id="recommendedContainer">
