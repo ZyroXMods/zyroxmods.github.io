@@ -399,6 +399,13 @@
         document.getElementById('video').src = "https://www.youtube.com/embed/" + game.vid;
         document.title = game.name + " | ZyroX Mods";
 
+        // --- NEW ACCORDION CLICK EVENT ---
+const accordion = document.getElementById('howToUseAccordion');
+accordion.onclick = () => {
+    accordion.classList.toggle('open');
+};
+
+
          // --- RECOMMENDED SECTION (SORTED BY DOWNLOADS) ---
 const recContainer = document.getElementById('recommendedContainer');
 async function loadRecommended() {
