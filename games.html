@@ -11,6 +11,7 @@
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
+        /* Background updated to #1a1e29 to match Home */
         body { background-color: #1a1e29; color: #ffffff; display: flex; justify-content: center; min-height: 100vh; }
         .container { width: 100%; max-width: 430px; }
 
@@ -20,6 +21,7 @@
 
         /* --- HEADER & MOD BADGE --- */
         .app-header { padding: 0 20px 25px; display: flex; gap: 20px; align-items: center; }
+        
         .icon-wrapper { position: relative; display: inline-block; flex-shrink: 0; }
         .app-icon { width: 100px; height: 100px; border-radius: 22px; border: 1px solid #242b38; object-fit: cover; background: #000; }
         
@@ -38,18 +40,33 @@
         .meta-row i { color: #ff4d4d; font-size: 0.75rem; }
 
         .action-row { display: flex; align-items: center; gap: 12px; }
+      /*  .get-btn { background: #ff4d4d; color: #fff; text-decoration: none; padding: 6px 28px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; transition: 0.2s; cursor: pointer; border: none; }*/
         .get-btn { 
-            background: #ff4d4d; color: #fff; text-decoration: none; padding: 8px 28px; border-radius: 20px; 
-            font-weight: 700; font-size: 0.85rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            cursor: pointer; border: none; display: inline-flex; justify-content: center; align-items: center;
-            min-width: 110px; gap: 8px; box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3); 
+    background: #ff4d4d; 
+    color: #fff; 
+    text-decoration: none; 
+    padding: 8px 28px; /* Padding ali badhauda click garna sajilo hunxa */
+    border-radius: 20px; 
+    font-weight: 700; 
+    font-size: 0.85rem; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Professional easing */
+    cursor: pointer; 
+    border: none; 
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 110px; /* Loading huda button ko size na-halleos vanera fixed width */
+    gap: 8px; /* Icon ra text ko bix ma gap */
+    box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3); /* Premium look ko lagi shadow */
         }
         .get-btn:active { transform: scale(0.95); background: #cc3d3d; }
+        
         .header-icon-circle { width: 32px; height: 32px; background: #242b38; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #ff4d4d; font-size: 0.8rem; text-decoration: none; }
 
         /* --- SECTIONS --- */
         .section-title { display: flex; align-items: center; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; padding: 25px 20px 12px; letter-spacing: 0.5px; color: #cfd8dc; }
         .section-title::before { content: ''; width: 3.5px; height: 16px; background: #ff4d4d; margin-right: 10px; border-radius: 2px; }
+
         .separator { border: none; height: 1px; background-color: #242b38; margin: 0 20px; }
 
         .preview-container { padding: 0 20px 5px; }
@@ -62,92 +79,211 @@
         .card-text h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 1px; }
         .card-text p { font-size: 0.7rem; color: #8e99ab; line-height: 1.2; }
 
-        /* --- ACCORDIONS --- */
-        .accordion-wrapper { background: #242b38; border: 1px solid rgba(255,255,255,0.05); border-radius: 18px; overflow: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .accordion-trigger { padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
-        .accordion-main { display: flex; align-items: center; gap: 15px; }
-        .chevron-icon { color: #8e99ab; font-size: 0.8rem; transition: transform 0.3s; }
-        .accordion-wrapper.open .chevron-icon { transform: rotate(180deg); color: #ff4d4d; }
+        /* --- NAYA THAPIYEKO ACCORDION STYLES --- */
+.accordion-wrapper {
+    background: #242b38; 
+    border: 1px solid rgba(255,255,255,0.05); 
+    border-radius: 18px;
+    overflow: hidden; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accordion-trigger { 
+    padding: 12px 18px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    cursor: pointer; 
+}
+.accordion-main { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+}
+.chevron-icon { 
+    color: #8e99ab; 
+    font-size: 0.8rem; 
+    transition: transform 0.3s; 
+}
+.accordion-wrapper.open .chevron-icon { 
+    transform: rotate(180deg); 
+    color: #ff4d4d; 
+}
+.accordion-content {
+    max-height: 0; 
+    padding: 0 18px; 
+    transition: all 0.3s ease-out; 
+    opacity: 0;
+    border-top: 1px solid transparent; 
+    background: rgba(26, 30, 41, 0.4);
+}
+.accordion-wrapper.open .accordion-content {
+    max-height: 400px; 
+    padding: 15px 18px; 
+    opacity: 1;
+    border-top: 1px solid rgba(255,255,255,0.05); 
+    overflow-y: auto;
+}
+.guide-steps { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+}
+.guide-step-item { 
+    display: flex; 
+    gap: 12px; 
+    font-size: 0.78rem; 
+    color: #cfd8dc; 
+    line-height: 1.4; 
+    text-align: left; 
+}
+.step-num { 
+    background: #ff4d4d; 
+    color: #fff; 
+    font-weight: bold; 
+    width: 18px; 
+    height: 18px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    flex-shrink: 0; 
+    font-size: 0.65rem; 
+}
         
-        .accordion-content { max-height: 0; padding: 0 18px; transition: all 0.3s ease-out; opacity: 0; border-top: 1px solid transparent; background: rgba(26, 30, 41, 0.4); overflow: hidden; }
-        .accordion-wrapper.open .accordion-content { max-height: 600px; padding: 15px 18px; opacity: 1; border-top: 1px solid rgba(255,255,255,0.05); overflow-y: auto; }
+/* --- CHAT COMPONENT ENGINE STYLES --- */
+.chat-layout-box { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.chat-input-wrapper { background: #1a1e29; border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 14px; margin-bottom: 5px; }
+
+.chat-control-row { 
+    display: flex; gap: 8px; justify-content: flex-start; align-items: center; margin-bottom: 8px; 
+    overflow-x: auto; white-space: nowrap; width: 100%; scrollbar-width: none; padding-bottom: 2px;
+}
+.chat-control-row::-webkit-scrollbar { display: none; }
+.chat-control-row > * { flex: 0 0 auto; }
+.chat-control-row select { background: #242b38; color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 8px; font-size: 0.75rem; outline: none; }
+
+.user-name-badge { background: #242b38; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 5px 10px; font-size: 0.72rem; color: #8e99ab; display: flex; align-items: center; gap: 6px; }
+.name-edit-trigger { color: #ff4d4d; cursor: pointer; font-weight: bold; font-size: 0.68rem; text-decoration: underline; }
+
+.chat-textarea { width: 100%; background: #242b38; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 10px; color: #fff; font-size: 0.8rem; resize: none; outline: none; }
+.chat-textarea::placeholder { color: #56637a; }
+.chat-post-btn { background: #ff4d4d; color: #fff; border: none; padding: 6px 16px; border-radius: 8px; font-size: 0.78rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+
+.threads-root { display: flex; flex-direction: column; gap: 10px; max-height: 450px; overflow-y: auto; padding-right: 2px; }
+
+.comment-node { background: #1a1e29; border-left: 3px solid #ff4d4d; border-radius: 8px; padding: 10px; margin-bottom: 4px; position: relative; }
+.comment-node.is-pinned-style { border-left-color: #ffcc00; background: rgba(255, 204, 0, 0.03); border-width: 4px; }
+.comment-node.is-my-style { border-left-color: #34c759; background: rgba(52, 199, 89, 0.02); }
+.comment-node.is-pinned-style.is-my-style { border-left-color: #ffcc00; background: rgba(255, 204, 0, 0.04); }
+
+.comment-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.meta-left { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.meta-right-time { font-size: 0.65rem; color: #56637a; font-weight: 500; }
+
+.commenter-name { font-size: 0.75rem; font-weight: 700; color: #ff4d4d; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.comment-node.is-my-style .commenter-name { color: #34c759; }
+
+.badge-user { background: rgba(255,255,255,0.1); color: #cfd8dc; font-size: 0.6rem; font-weight: bold; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; }
+.badge-admin { background: rgba(255, 77, 77, 0.15); color: #ff4d4d; font-size: 0.6rem; font-weight: bold; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid rgba(255, 77, 77, 0.2); }
+.badge-own-cmt { background: rgba(52, 199, 89, 0.2); color: #34c759; font-size: 0.6rem; font-weight: 900; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid rgba(52, 199, 89, 0.3); }
+
+.tag-issue { background: rgba(52, 199, 89, 0.1); color: #34c759; font-size: 0.6rem; font-weight: bold; padding: 1px 6px; border-radius: 4px; }
+.tag-pinned { background: rgba(255, 204, 0, 0.15); color: #ffcc00; font-size: 0.6rem; font-weight: bold; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid rgba(255, 204, 0, 0.3); display: inline-flex; align-items: center; gap: 3px; }
+
+.comment-text { font-size: 0.78rem; color: #e2e8f0; line-height: 1.3; word-break: break-word; text-align: left; padding: 2px 0 4px 0; }
+.node-actions { display: flex; gap: 12px; margin-top: 4px; justify-content: flex-start; align-items: center; flex-wrap: wrap; }
+
+.reply-trigger-btn, .pin-trigger-btn, .edit-trigger-btn, .delete-trigger-btn, .heart-react-btn { 
+    background: none; border: none; color: #8e99ab; font-size: 0.68rem; cursor: pointer; 
+    font-weight: 600; padding: 0; display: inline-flex; align-items: center; gap: 4px; transition: 0.2s; 
+}
+.reply-trigger-btn:hover { color: #fff; }
+.delete-trigger-btn:hover { color: #ff4d4d; }
+.edit-trigger-btn:hover { color: #34c759; }
+.pin-trigger-btn:hover { color: #ffcc00; }
+.heart-react-btn { color: #8e99ab; }
+.heart-react-btn:hover { color: #ff4d4d; }
+.heart-react-btn.liked { color: #ff4d4d !important; font-weight: bold; }
+
+.replies-box { margin-top: 8px; padding-left: 8px; display: flex; flex-direction: column; gap: 6px; border-left: 1px dashed rgba(255,255,255,0.1); }
+.nested-form { background: #1a1e29; padding: 8px; border-radius: 10px; margin: 6px 0; border: 1px solid rgba(255,255,255,0.05); }
+.nested-form-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.nested-form-row select { background: #242b38; color: #fff; border: 1px solid rgba(255,255,255,0.1); font-size: 0.7rem; padding: 3px 6px; border-radius: 4px; }
+.nested-actions { display: flex; gap: 6px; }
+.nested-cancel { background: none; border: none; color: #8e99ab; font-size: 0.7rem; cursor: pointer; }
+.nested-submit { background: #34c759; color: #fff; border: none; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; cursor: pointer; }
         
-        .guide-steps { display: flex; flex-direction: column; gap: 12px; }
-        .guide-step-item { display: flex; gap: 12px; font-size: 0.78rem; color: #cfd8dc; line-height: 1.4; text-align: left; }
-        .step-num { background: #ff4d4d; color: #fff; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.65rem; }
-        
-        /* --- CHAT SYSTEM INTERFACE --- */
-        .chat-layout-box { display: flex; flex-direction: column; gap: 10px; }
-        .chat-input-wrapper { background: #1a1e29; border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 14px; margin-bottom: 5px; }
-
-        .chat-control-row { display: flex; gap: 8px; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .chat-control-row select { background: #242b38; color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 8px; font-size: 0.75rem; outline: none; }
-        .chat-textarea { width: 100%; background: #242b38; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 10px; color: #fff; font-size: 0.8rem; resize: none; outline: none; }
-        .chat-textarea::placeholder { color: #56637a; }
-        .chat-post-btn { background: #ff4d4d; color: #fff; border: none; padding: 6px 16px; border-radius: 8px; font-size: 0.78rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
-
-        .threads-root { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; padding-right: 2px; }
-
-        .comment-node { background: #1a1e29; border-left: 3px solid #ff4d4d; border-radius: 8px; padding: 10px; margin-bottom: 4px; position: relative; }
-        .comment-node.is-pinned-style { border-left-color: #ffcc00; background: rgba(255, 204, 0, 0.03); }
-        
-        .comment-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-        .meta-left { display: flex; gap: 6px; align-items: center; }
-
-        .badge-user { background: rgba(255,255,255,0.1); color: #cfd8dc; font-size: 0.6rem; font-weight: bold; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; }
-        .badge-admin { background: rgba(255, 77, 77, 0.15); color: #ff4d4d; font-size: 0.6rem; font-weight: bold; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid rgba(255, 77, 77, 0.2); }
-        .tag-issue { background: rgba(52, 199, 89, 0.1); color: #34c759; font-size: 0.6rem; font-weight: bold; padding: 1px 6px; border-radius: 4px; }
-        
-        .tag-pinned { background: rgba(255, 204, 0, 0.15); color: #ffcc00; font-size: 0.6rem; font-weight: bold; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid rgba(255, 204, 0, 0.3); display: inline-flex; align-items: center; gap: 3px; }
-
-        .comment-text { font-size: 0.78rem; color: #e2e8f0; line-height: 1.3; word-break: break-word; text-align: left; }
-        .node-actions { display: flex; gap: 12px; margin-top: 6px; justify-content: flex-start; align-items: center; flex-wrap: wrap; }
-        
-        .reply-trigger-btn, .pin-trigger-btn, .edit-trigger-btn, .delete-trigger-btn, .heart-react-btn { background: none; border: none; color: #8e99ab; font-size: 0.68rem; cursor: pointer; font-weight: 600; padding: 0; display: inline-flex; align-items: center; gap: 4px; transition: 0.2s; }
-        .reply-trigger-btn:hover { color: #fff; }
-        .delete-trigger-btn:hover { color: #ff4d4d; }
-        .edit-trigger-btn:hover { color: #34c759; }
-        .pin-trigger-btn:hover { color: #ffcc00; }
-        .heart-react-btn { color: #ff4d4d90; }
-        .heart-react-btn:hover { color: #ff4d4d; transform: scale(1.1); }
-        .heart-react-btn.liked { color: #ff4d4d !important; font-weight: bold; pointer-events: none; }
-
-        .replies-box { margin-top: 8px; padding-left: 8px; display: flex; flex-direction: column; gap: 6px; }
-        .nested-form { background: #242b38; padding: 8px; border-radius: 10px; margin: 6px 0; border: 1px solid rgba(255,255,255,0.05); }
-        .nested-form-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-        .nested-form-row select { background: #1a1e29; color: #fff; border: none; font-size: 0.7rem; padding: 3px 6px; border-radius: 4px; }
-        .nested-actions { display: flex; gap: 6px; }
-        .nested-cancel { background: none; border: none; color: #8e99ab; font-size: 0.7rem; cursor: pointer; }
-        .nested-submit { background: #34c759; color: #fff; border: none; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; cursor: pointer; }
-
         /* RECOMMENDED LIST */
         .recommend-section { padding: 0 20px 30px; }
         .recommend-item { display: flex; align-items: center; gap: 15px; text-decoration: none; color: #fff; margin-bottom: 18px; transition: 0.2s; }
         .recommend-item:active { transform: scale(0.98); opacity: 0.8; }
         .recommend-thumb { width: 110px; height: 65px; border-radius: 12px; object-fit: cover; background: #000; border: 1px solid #242b38; flex-shrink: 0; }
-        .recommend-info { display: flex; flex-direction: column; justify-content: center; flex: 1; }
-        .recommend-info h3 { font-size: 0.9rem; font-weight: 700; line-height: 1.2; margin-bottom: 2px; }
+      /*  .recommend-info h3 { font-size: 0.85rem; font-weight: 600; line-height: 1.3; color: #ffffff; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }*/
+        .recommend-info h3 span { color: #ff4d4d; }
+        .recommend-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1; /* Space pura fill garna */
+}
 
-        /* Lock Overlay Module */
-        .lock-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 12, 18, 0.99); z-index: 10000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(15px); }
-        .lock-box { background: #1a1e29; padding: 25px; border-radius: 28px; width: 92%; max-width: 380px; text-align: center; border: 1px solid rgba(255, 77, 77, 0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
-        .lock-box h2 { font-size: 1.2rem; font-weight: 800; color: #fff; text-transform: uppercase; margin-bottom: 5px; }
-        .top-desc { font-size: 0.75rem; color: #8e99ab; margin-bottom: 20px; }
+.recommend-info h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
 
-        .step-item { display: flex; align-items: center; justify-content: space-between; background: #242b38; padding: 15px; border-radius: 16px; text-decoration: none; color: #fff; margin-bottom: 12px; border: 1px solid transparent; transition: 0.3s; }
-        .step-item.done { border-color: #34c759; background: #1b2621; pointer-events: none; }
-        .step-item i { color: #ff4d4d; font-size: 1.1rem; }
-        .step-item.done i { color: #34c759; }
+        
+/* Sub4Unlock Advanced Overlay */
+.lock-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 12, 18, 0.99); z-index: 10000;
+    display: none; align-items: center; justify-content: center; backdrop-filter: blur(15px);
+}
+.lock-box { 
+    background: #1a1e29; padding: 25px; border-radius: 28px; 
+    width: 92%; max-width: 380px; text-align: center; 
+    border: 1px solid rgba(255, 77, 77, 0.2); 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.8); 
+}
+.lock-box h2 { font-size: 1.2rem; font-weight: 800; color: #fff; text-transform: uppercase; margin-bottom: 5px; }
+.top-desc { font-size: 0.75rem; color: #8e99ab; margin-bottom: 20px; }
 
-        .unlock-btn { width: 100%; padding: 16px; border-radius: 16px; border: none; background: #2d3544; color: #ffffff50; font-weight: 800; cursor: not-allowed; margin-top: 10px; transition: 0.4s; }
-        .unlock-btn.active { background: #34c759; color: #fff; cursor: pointer; opacity: 1; box-shadow: 0 8px 20px rgba(52, 199, 89, 0.4); }
+.step-item {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #242b38; padding: 15px; border-radius: 16px;
+    text-decoration: none; color: #fff; margin-bottom: 12px; 
+    border: 1px solid transparent; transition: 0.3s;
+}
+.step-item.done { border-color: #34c759; background: #1b2621; pointer-events: none; }
+.step-item i { color: #ff4d4d; font-size: 1.1rem; }
+.step-item.done i { color: #34c759; }
 
-        .bottom-note { margin-top: 20px; padding-top: 15px; border-top: 1px solid #242b38; font-size: 0.65rem; color: #6b7a94; line-height: 1.4; text-align: left; }
-        .fa-spin { color: #ffcc00 !important; }
-        .step-item.disabled { opacity: 0.5; pointer-events: none; filter: grayscale(1); }
+.unlock-btn {
+    width: 100%; padding: 16px; border-radius: 16px; border: none;
+    background: #2d3544; color: #ffffff50; font-weight: 800; 
+    cursor: not-allowed; margin-top: 10px; transition: 0.4s;
+}
+.unlock-btn.active { background: #34c759; color: #fff; cursor: pointer; opacity: 1; box-shadow: 0 8px 20px rgba(52, 199, 89, 0.4); }
+
+.bottom-note { 
+    margin-top: 20px; padding-top: 15px; border-top: 1px solid #242b38; 
+    font-size: 0.65rem; color: #6b7a94; line-height: 1.4; text-align: left; 
+}
+.fa-spin { color: #ffcc00 !important; } /* Spinner color */
+        
+/* Disabled step ko lagi style */
+.step-item.disabled {
+    opacity: 0.5;
+    pointer-events: none; /* Yesle click garna dindaina */
+    filter: grayscale(1);
+}
         
         footer { padding: 20px 0 30px; text-align: center; border-top: 1px solid #242b38; margin-top: 10px; }
         .footer-text { color: #4e5d78; font-size: 0.55rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+
+        
     </style>
 </head>
 <body>
@@ -164,11 +300,19 @@
             </div>
             <div class="header-content">
                 <h1 id="name" class="app-name">Loading...</h1>
+                
                 <div class="meta-row">
-                    <div class="meta-item"><i class="fas fa-code-branch"></i> <span id="version">v1.0</span></div>
-                    <div class="meta-item"><i id="catIcon" class="fas fa-gamepad"></i> <span id="category">Games</span></div>
-                    <div class="meta-item"><i class="fas fa-download"></i> <span id="downloadCount">0</span></div>
+                    <div class="meta-item">
+                        <i class="fas fa-code-branch"></i> <span id="version">v1.0</span>
+                    </div>
+                    <div class="meta-item">
+                        <i id="catIcon" class="fas fa-gamepad"></i> <span id="category">Games</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-download"></i> <span id="downloadCount">0</span>
+                    </div>
                 </div>
+
                 <div class="action-row">
                     <a href="#" id="mainDownloadBtn" class="get-btn">GET</a>
                     <a href="https://youtube.com/@ZyroXModder" class="header-icon-circle"><i class="fas fa-play"></i></a>
@@ -186,105 +330,132 @@
         </div>
 
         <h2 class="section-title">Guide & Support</h2>
-        <div class="cards-container">
-            <a href="#" id="cardDownloadBtn" class="action-card">
-                <div class="icon-box" style="color: #ff4d4d;"><i class="fas fa-cloud-download-alt"></i></div>
-                <div class="card-text">
-                    <h3>Download APK</h3>
-                    <p>Get the latest modded version safely.</p>
-                </div>
-            </a>
+   <div class="cards-container">
+       
+       <!-- Download APK Card -->
+       <a href="#" id="cardDownloadBtn" class="action-card">
+           <div class="icon-box" style="color: #ff4d4d;"><i class="fas fa-cloud-download-alt"></i></div>
+           <div class="card-text">
+               <h3>Download APK</h3>
+               <p>Get the latest modded version safely.</p>
+           </div>
+       </a>
 
-            <div class="accordion-wrapper" id="howToUseAccordion">
-                <div class="accordion-trigger">
-                    <div class="accordion-main">
-                        <div class="icon-box" style="color: #ffcc00;"><i class="fas fa-book-open"></i></div>
-                        <div class="card-text">
-                            <h3>How To Use?</h3>
-                            <p>Click here to expand guidelines on this page.</p>
-                        </div>
-                    </div>
-                    <div class="chevron-icon"><i class="fas fa-chevron-down"></i></div>
-                </div>
-                <div class="accordion-content">
-                    <div class="guide-steps">
-                        <div class="guide-step-item"><div class="step-num">1</div><div>Click the <b>GET</b> button above to download the Mod APK file.</div></div>
-                        <div class="guide-step-item"><div class="step-num">2</div><div>If old version is installed, please <b>Uninstall</b> it first.</div></div>
-                        <div class="guide-step-item"><div class="step-num">3</div><div>Allow <b>"Unknown Sources"</b> inside Mobile Settings and install APK.</div></div>
-                        <div class="guide-step-item"><div class="step-num">4</div><div>Open the game and turn ON Mod Options from the overlay!</div></div>
-                    </div>
-                </div>
-            </div>
+       <!-- Accordion Guide (Telegram ko thau ma) -->
+       <div class="accordion-wrapper" id="howToUseAccordion">
+           <div class="accordion-trigger">
+               <div class="accordion-main">
+                   <div class="icon-box" style="color: #ffcc00;"><i class="fas fa-book-open"></i></div>
+                   <div class="card-text">
+                       <h3>How To Use?</h3>
+                       <p>Click here to expand guidelines on this page.</p>
+                   </div>
+               </div>
+               <div class="chevron-icon"><i class="fas fa-chevron-down"></i></div>
+           </div>
+           <div class="accordion-content">
+               <div class="guide-steps">
+                   <div class="guide-step-item">
+                       <div class="step-num">1</div>
+                       <div>Click the <b>GET</b> button above to download the Mod APK file from our secure server.</div>
+                   </div>
+                   <div class="guide-step-item">
+                       <div class="step-num">2</div>
+                       <div>If the old regular version of the game is installed on your device, please <b>Uninstall</b> it first.</div>
+                   </div>
+                   <div class="guide-step-item">
+                       <div class="step-num">3</div>
+                       <div>Go to your Mobile Settings, allow <b>"Unknown Sources"</b> and install the downloaded APK.</div>
+                   </div>
+                   <div class="guide-step-item">
+                       <div class="step-num">4</div>
+                       <div>Open the game, an overlay icon will appear on the screen—turn ON the Mod Options from there and enjoy!</div>
+                   </div>
+               </div>
+           </div>
+       </div>
 
-            <!-- CHAT SYSTEM COMPONENT BOX -->
-            <div class="accordion-wrapper" id="chatAccordion">
-                <div class="accordion-trigger">
-                    <div class="accordion-main">
-                        <div class="icon-box" style="color: #34c759;"><i class="fas fa-comments"></i></div>
-                        <div class="card-text">
-                            <h3>Report Bug & Chat</h3>
-                            <p>Ask doubts or report bugs regarding this game.</p>
-                        </div>
-                    </div>
-                    <div class="chevron-icon"><i class="fas fa-chevron-down"></i></div>
-                </div>
-                <div class="accordion-content">
-                    <div class="chat-layout-box">
-                        
-                        <div class="chat-input-wrapper">
-                            <div class="chat-control-row">
-                                <select id="mainIssue">
-                                    <option value="General">💬 General Enquiry</option>
-                                    <option value="Mod Crash">💥 Menu Crashing</option>
-                                    <option value="Auth Error">🔑 Key/Auth Error</option>
-                                    <option value="Not Working">⚙️ Mod Not Working</option>
-                                </select>
-                                <select id="postRole">
-                                    <option value="User">👤 User</option>
-                                    <option value="Admin">🛡️ Admin</option>
-                                </select>
-                            </div>
-                            <textarea id="mainChatInput" class="chat-textarea" rows="2" placeholder="Type your comment or info here..."></textarea>
-                            <div class="chat-control-row" style="margin-top:4px; justify-content: flex-end;">
-                                <button class="chat-post-btn" onclick="postMainThread(event)">Post Thread</button>
-                            </div>
-                        </div>
-
-                        <div class="threads-root" id="chatThreadsContainer">
-                            <p style="font-size:0.75rem; color:#8e99ab; text-align:center;">Loading discussion threads...</p>
-                        </div>
-
-                    </div>
-                </div>
+       <!-- Report Bug Card -->
+       <div class="accordion-wrapper" id="chatAccordion">
+    <div class="accordion-trigger" onclick="toggleAccordion('chatAccordion')">
+        <div class="accordion-main">
+            <div class="icon-box" style="color: #34c759;"><i class="fas fa-comments"></i></div>
+            <div class="card-text">
+                <h3>Report Bug & Chat</h3>
+                <p>Ask doubts or report bugs regarding this game.</p>
             </div>
         </div>
-
-        <h2 class="section-title">You may like these posts</h2>
-        <div class="recommend-section" id="recommendedContainer"></div>
-
-        <!-- Lock Overlay Module -->
-        <div class="lock-overlay" id="lockOverlay">
-            <div class="lock-box">
-                <h2><i class="fas fa-lock" style="color:#ff4d4d;"></i> Link Locked</h2>
-                <p class="top-desc">Complete tasks to support ZyroX Mods</p>
-                <a href="https://youtube.com/@imzyroxmods?sub_confirmation=1" target="_blank" class="step-item" id="s1-btn">
-                    <span><i class="fab fa-youtube"></i> Subscribe Channel 1</span>
-                    <i class="fas fa-circle-notch" id="s1-icon"></i>
-                </a>
-                <a href="https://youtube.com/@zyroxmodder?sub_confirmation=1" target="_blank" class="step-item" id="s2-btn">
-                    <span><i class="fab fa-youtube"></i> Subscribe Channel 2</span>
-                    <i class="fas fa-circle-notch" id="s2-icon"></i>
-                </a>
-                <a href="#" id="videoTask" target="_blank" class="step-item">
-                    <span><i class="fas fa-thumbs-up"></i> Like & Comment Video</span>
-                    <i class="fas fa-circle-notch" id="s3-icon"></i>
-                </a>
-                <button class="unlock-btn" id="finalUnlock" disabled>FINISH ALL STEPS</button>
-                <div class="bottom-note">
-                    <b>NOTE:</b> Stay on page for 5 seconds after clicking.
+        <div class="chevron-icon"><i class="fas fa-chevron-down"></i></div>
+    </div>
+    <div class="accordion-content">
+        <div class="chat-layout-box">
+            
+            <div class="chat-input-wrapper">
+                <div class="chat-control-row">
+                    <div class="user-name-badge">
+                        <i class="fas fa-user" style="color:#34c759;"></i>
+                        <span id="displayNick">Guest</span>
+                        <span class="name-edit-trigger" onclick="forceChangeName(event)">(Edit)</span>
+                    </div>
+                    <select id="mainIssue">
+                        <option value="General">💬 General Enquiry</option>
+                        <option value="Mod Crash">💥 Menu Crashing</option>
+                        <option value="Auth Error">🔑 Key/Auth Error</option>
+                        <option value="Not Working">⚙️ Mod Not Working</option>
+                    </select>
+                    <select id="postRole">
+                        <option value="User">👤 User</option>
+                        <option value="Admin">🛡️ Admin</option>
+                    </select>
+                </div>
+                <textarea id="mainChatInput" class="chat-textarea" rows="2" placeholder="Type your comment or info here..."></textarea>
+                <div class="chat-control-row" style="margin-top:4px; justify-content: flex-end; overflow:hidden;">
+                    <button class="chat-post-btn" onclick="postMainThread(event)">Post Thread</button>
                 </div>
             </div>
+
+            <div class="threads-root" id="chatThreadsContainer">
+                <p style="font-size:0.75rem; color:#8e99ab; text-align:center;">Loading discussion threads...</p>
+            </div>
+
         </div>
+    </div>
+</div>
+
+   </div>
+
+          <h2 class="section-title">You may like these posts</h2>
+        <div class="recommend-section" id="recommendedContainer">
+        </div>
+
+<div class="lock-overlay" id="lockOverlay">
+    <div class="lock-box">
+        <h2><i class="fas fa-lock" style="color:#ff4d4d;"></i> Link Locked</h2>
+        <p class="top-desc">Complete tasks to support ZyroX Mods</p>
+        
+        <a href="https://youtube.com/@imzyroxmods?sub_confirmation=1" target="_blank" class="step-item" id="s1-btn">
+            <span><i class="fab fa-youtube"></i> Subscribe Channel 1</span>
+            <i class="fas fa-circle-notch" id="s1-icon"></i>
+        </a>
+
+        <a href="https://youtube.com/@zyroxmodder?sub_confirmation=1" target="_blank" class="step-item" id="s2-btn">
+            <span><i class="fab fa-youtube"></i> Subscribe Channel 2</span>
+            <i class="fas fa-circle-notch" id="s2-icon"></i>
+        </a>
+
+        <a href="#" id="videoTask" target="_blank" class="step-item">
+            <span><i class="fas fa-thumbs-up"></i> Like & Comment Video</span>
+            <i class="fas fa-circle-notch" id="s3-icon"></i>
+        </a>
+
+        <button class="unlock-btn" id="finalUnlock" disabled>FINISH ALL STEPS</button>
+
+        <div class="bottom-note">
+            <b>NOTE:</b> After clicking, stay on the page for 5 seconds. Verification happens automatically. Do not close the tab instantly!
+        </div>
+    </div>
+</div>
+        
         
         <footer>
             <div class="footer-text">© 2026 ZYROX MODS • PREMIUM</div>
@@ -322,7 +493,7 @@
     const id = urlParams.get('id');
     const game = gameData[id];
 
-    if(game) {
+        if(game) {
         document.getElementById('name').innerText = game.name;
         document.getElementById('icon').src = game.img;
         document.getElementById('version').innerText = "v" + game.version;
@@ -331,433 +502,542 @@
         document.getElementById('video').src = "https://www.youtube.com/embed/" + game.vid;
         document.title = game.name + " | ZyroX Mods";
 
-        document.getElementById('howToUseAccordion').onclick = function(e) {
-            if(!e.target.closest('.accordion-content')) this.classList.toggle('open');
-        };
-        document.getElementById('chatAccordion').onclick = function(e) {
-            if(!e.target.closest('.accordion-content')) this.classList.toggle('open');
-        };
-
-        const ADMIN_SECRET_KEY = "a"; 
-        let isAdminAuthenticated = false;
-        let chatRef = database.ref('game_chats/' + id);
-        let pinRef = database.ref('pinned_comments/' + id);
-        
-        let globalPinnedMessage = ""; 
-
-        // Role selection check
-        const postRoleSelect = document.getElementById('postRole');
-        if(postRoleSelect) {
-            postRoleSelect.onchange = function() {
-                if(this.value === 'Admin') {
-                    if(!isAdminAuthenticated) {
-                        const password = prompt("Enter Admin Security Password:");
-                        if(password === ADMIN_SECRET_KEY) {
-                            isAdminAuthenticated = true;
-                            alert("Access Granted, Admin!");
-                            triggerCommentRender();
-                        } else {
-                            alert("Wrong Password!");
-                            this.value = 'User'; 
-                            isAdminAuthenticated = false;
-                            triggerCommentRender();
-                        }
-                    } else {
-                        triggerCommentRender();
-                    }
-                } else {
-                    isAdminAuthenticated = false; 
-                    triggerCommentRender();
-                }
+               // --- ACCORDION TOGGLE LOGIC FIXED ---
+        // How To Use Accordion Click Listener
+        const howToUse = document.getElementById('howToUseAccordion');
+        if(howToUse) {
+            howToUse.onclick = () => {
+                howToUse.classList.toggle('open');
             };
         }
 
-        // Live sync pinned data
-        pinRef.on('value', (snapshot) => {
-            const val = snapshot.val();
-            globalPinnedMessage = (val && val.message) ? val.message : "";
-            triggerCommentRender(); 
-        });
+        // Global function reference banako chat click handler ko lagi
+        window.toggleAccordion = function(accordionId) {
+            const acc = document.getElementById(accordionId);
+            if(acc) {
+                acc.classList.toggle('open');
+            }
+        };
 
-        chatRef.on('value', (snapshot) => {
-            renderComments(snapshot.val());
-        });
+    /* --- CHAT CONFIG ENGINE CORE LOGIC --- */
+const ADMIN_SECRET_KEY = "zyrox2026"; 
+let isAdminAuthenticated = false; 
 
-        function postMainThread(e) {
-            if(e) e.stopPropagation();
-            if(!chatRef) return;
-            const textInput = document.getElementById('mainChatInput');
-            const issueTag = document.getElementById('mainIssue').value;
-            const role = document.getElementById('postRole').value;
-            const text = textInput.value.trim();
-            if(text === "") return;
+let chatRef = database.ref('game_chats/' + id);
+let pinRef = database.ref('pinned_comments/' + id);
+let globalPinnedId = ""; 
 
-            if(role === 'Admin' && !isAdminAuthenticated) return;
+function timeAgo(timestamp) {
+    if (!timestamp) return "Just now";
+    const diff = Date.now() - timestamp;
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
 
-            // Push item to DB
-            const newCommentRef = chatRef.push();
-            const commentId = newCommentRef.key;
+    if (seconds < 60) return "Just now";
+    if (minutes < 60) return minutes + "m ago";
+    if (hours < 24) return hours + "h ago";
+    return days + "d ago";
+}
 
-            newCommentRef.set({
-                role: role,
-                tag: issueTag,
-                message: text,
-                hearts: 0,
-                timestamp: firebase.database.ServerValue.TIMESTAMP
-            }, (error) => {
-                if(!error) {
-                    textInput.value = ""; 
-                    // SUB4UNLOCK tracker data structure logic: Own comments saved to LocalStorage
-                    localStorage.setItem('my_comment_' + commentId, 'true');
-                }
+function getOrSetUserNickname() {
+    let name = localStorage.getItem('zyrox_user_nickname');
+    if(!name || name.trim() === "" || name === "null") {
+        name = "Guest_" + Math.floor(1000 + Math.random() * 9000);
+        localStorage.setItem('zyrox_user_nickname', name);
+    }
+    document.getElementById('displayNick').innerText = name;
+    return name;
+}
+
+window.forceChangeName = function(e) {
+    if(e) e.stopPropagation();
+    let oldName = localStorage.getItem('zyrox_user_nickname') || "Guest";
+    let newName = prompt("Change your comment nickname:", oldName);
+    if(newName && newName.trim() !== "") {
+        newName = newName.trim().substring(0, 15);
+        localStorage.setItem('zyrox_user_nickname', newName);
+        document.getElementById('displayNick').innerText = newName;
+        triggerCommentRender();
+    }
+};
+
+const postRoleSelect = document.getElementById('postRole');
+if(postRoleSelect) {
+    postRoleSelect.onchange = function() {
+        if(this.value === 'Admin') {
+            const password = prompt("Enter Admin Security Password:");
+            if(password === ADMIN_SECRET_KEY) {
+                isAdminAuthenticated = true;
+                alert("Access Granted, Admin!");
+            } else {
+                alert("Wrong Password!");
+                this.value = 'User'; 
+                isAdminAuthenticated = false; 
+            }
+        } else {
+            isAdminAuthenticated = false;
+        }
+        triggerCommentRender(); 
+    };
+}
+
+pinRef.on('value', (snapshot) => {
+    const val = snapshot.val();
+    globalPinnedId = (val && val.commentId) ? val.commentId : "";
+    triggerCommentRender(); 
+});
+
+chatRef.on('value', (snapshot) => {
+    renderComments(snapshot.val());
+});
+
+window.postMainThread = function(e) {
+    if(e) e.stopPropagation();
+    const textInput = document.getElementById('mainChatInput');
+    const issueTag = document.getElementById('mainIssue').value;
+    const role = postRoleSelect.value;
+    const text = textInput.value.trim();
+    if(text === "") return;
+
+    if(role === 'Admin' && !isAdminAuthenticated) return;
+
+    let finalName = "Admin";
+    let isUserCmt = false;
+    if(role !== 'Admin') {
+        finalName = getOrSetUserNickname();
+        isUserCmt = true;
+    }
+
+    const newCommentRef = chatRef.push();
+    const commentId = newCommentRef.key;
+
+    if(isUserCmt) {
+        localStorage.setItem('my_comment_' + commentId, 'true');
+    }
+
+    newCommentRef.set({
+        username: finalName,
+        role: role,
+        tag: issueTag,
+        message: text,
+        hearts: 0,
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+    }, (error) => {
+        if(!error) {
+            textInput.value = ""; 
+            triggerCommentRender();
+        }
+    });
+};
+
+function triggerCommentRender() {
+    chatRef.get().then((snapshot) => { renderComments(snapshot.val()); });
+}
+
+function renderComments(data) {
+    const container = document.getElementById('chatThreadsContainer');
+    if(!container) return;
+    container.innerHTML = "";
+    
+    if(!data) {
+        container.innerHTML = `<p style="font-size:0.75rem; color:#8e99ab; text-align:center; padding:10px;">No reviews yet.</p>`;
+        return;
+    }
+
+    const sortedKeys = Object.keys(data).sort((a, b) => {
+        const isAPinned = (a === globalPinnedId) ? 1 : 0;
+        const isBPinned = (b === globalPinnedId) ? 1 : 0;
+        if (isAPinned !== isBPinned) return isBPinned - isAPinned; 
+        return data[b].timestamp - data[a].timestamp;
+    });
+
+    sortedKeys.forEach(commentId => {
+        const node = data[commentId];
+        if(node.message) { 
+            const nodeDiv = document.createElement('div');
+            nodeDiv.classList.add('comment-node');
+            
+            const isCurrentNodePinned = (commentId === globalPinnedId);
+            if(isCurrentNodePinned) nodeDiv.classList.add('is-pinned-style');
+            
+            const isMyComment = localStorage.getItem('my_comment_' + commentId) === 'true';
+            if(isMyComment && node.role !== 'Admin') nodeDiv.classList.add('is-my-style');
+            
+            const cmtUser = node.username || "Guest";
+            const mainTimeText = timeAgo(node.timestamp);
+            
+            let repliesHTML = "";
+            if(node.replies) {
+                Object.keys(node.replies).sort((a,b) => node.replies[a].timestamp - node.replies[b].timestamp).forEach(rId => {
+                    const rep = node.replies[rId];
+                    const isMyReply = localStorage.getItem('my_reply_' + rId) === 'true';
+                    const rHearts = rep.hearts || 0;
+                    const replyUser = rep.username || "Guest";
+                    const replyTimeText = timeAgo(rep.timestamp);
+                    
+                    let rBadgeHTML = "";
+                    if(rep.role === 'Admin') {
+                        rBadgeHTML = `<span class="commenter-name" style="color:#ff4d4d;">@${replyUser}</span> <span class="badge-admin">ADMIN</span>`;
+                    } else if(isMyReply) {
+                        rBadgeHTML = `<span class="commenter-name" style="color:#34c759;">@${replyUser}</span> <span class="badge-own-cmt"><i class="fas fa-user-check"></i> YOUR REPLY</span>`;
+                    } else {
+                        rBadgeHTML = `<span class="commenter-name" style="color:#8e99ab;">@${replyUser}</span> <span class="badge-user">USER</span>`;
+                    }
+                    
+                    let rDeleteBtn = "";
+                    let rEditBtn = "";
+                    const safeReplyMsg = rep.message.replace(/'/g, "\\'").replace(/"/g, '\\"');
+
+                    if(isAdminAuthenticated) {
+                        rDeleteBtn = `<button class="delete-trigger-btn" onclick="deleteReplyNode('${commentId}','${rId}', event)"><i class="fas fa-trash"></i> Delete</button>`;
+                    } else if(isMyReply && rep.role !== 'Admin') {
+                        rEditBtn = `<button class="edit-trigger-btn" onclick="editReplyNode('${commentId}','${rId}','${safeReplyMsg}', event)"><i class="fas fa-edit"></i> Edit</button>`;
+                        rDeleteBtn = `<button class="delete-trigger-btn" onclick="deleteReplyNode('${commentId}','${rId}', event)"><i class="fas fa-trash"></i> Delete</button>`;
+                    }
+
+                    const hasLikedReply = localStorage.getItem(`liked_${commentId}_${rId}`) ? 'liked' : '';
+
+                    repliesHTML += `
+                        <div class="comment-node ${isMyReply && rep.role !== 'Admin' ? 'is-my-style' : ''}" style="border-left-width: 2px; margin-top: 5px; padding: 8px 10px;">
+                            <div class="comment-meta">
+                                <div class="meta-left">${rBadgeHTML}</div>
+                                <div class="meta-right-time">${replyTimeText}</div>
+                            </div>
+                            <div class="comment-text">${rep.message}</div>
+                            <div class="node-actions">
+                                <button class="reply-trigger-btn" onclick="showInlineReplyForm('${commentId}', this, event)">Reply</button>
+                                ${rEditBtn}
+                                <button class="heart-react-btn ${hasLikedReply}" onclick="likeReplyNode('${commentId}','${rId}', this, event)"><i class="fas fa-heart"></i> <span>${rHearts}</span></button>
+                                ${rDeleteBtn}
+                            </div>
+                        </div>`;
+                });
+            }
+
+            let mainBadgeHTML = "";
+            if(node.role === 'Admin') {
+                mainBadgeHTML = `<span class="commenter-name">@${cmtUser}</span> <span class="badge-admin">ADMIN</span>`;
+            } else if(isMyComment) {
+                mainBadgeHTML = `<span class="commenter-name">@${cmtUser}</span> <span class="badge-own-cmt"><i class="fas fa-user-check"></i> YOUR COMMENT</span>`;
+            } else {
+                mainBadgeHTML = `<span class="commenter-name" style="color:#8e99ab;">@${cmtUser}</span> <span class="badge-user">USER</span>`;
+            }
+            
+            const mainHearts = node.hearts || 0;
+            let deleteActionHTML = "";
+            let editActionHTML = "";
+            let pinActionHTML = "";
+            
+            const safeMsgAll = node.message.replace(/'/g, "\\'").replace(/"/g, '\\"');
+
+            if(isAdminAuthenticated) {
+                const pinButtonLabel = isCurrentNodePinned ? `<i class="fas fa-thumbtack" style="color:#ffcc00;"></i> Unpin` : `<i class="fas fa-thumbtack"></i> Pin`;
+                pinActionHTML = `<button class="pin-trigger-btn" onclick="togglePinCommentNode('${commentId}', event)">${pinButtonLabel}</button>`;
+                deleteActionHTML = `<button class="delete-trigger-btn" onclick="deleteCommentNode('${commentId}', event)"><i class="fas fa-trash"></i> Delete</button>`;
+            } else if(isMyComment && node.role !== 'Admin') {
+                editActionHTML = `<button class="edit-trigger-btn" onclick="editCommentNode('${commentId}','${safeMsgAll}', event)"><i class="fas fa-edit"></i> Edit</button>`;
+                deleteActionHTML = `<button class="delete-trigger-btn" onclick="deleteCommentNode('${commentId}', event)"><i class="fas fa-trash"></i> Delete</button>`;
+            }
+
+            const pinBadgeTagHTML = isCurrentNodePinned ? `<span class="tag-pinned"><i class="fas fa-thumbtack"></i> PINNED</span>` : '';
+            const hasLikedMain = localStorage.getItem(`liked_${commentId}`) ? 'liked' : '';
+
+            nodeDiv.innerHTML = `
+                <div class="comment-meta">
+                    <div class="meta-left">
+                        ${mainBadgeHTML}
+                        <span class="tag-issue">${node.tag}</span>
+                        ${pinBadgeTagHTML}
+                    </div>
+                    <div class="meta-right-time">${mainTimeText}</div>
+                </div>
+                <div class="comment-text" id="text-${commentId}">${node.message}</div>
+                <div class="node-actions">
+                    <button class="reply-trigger-btn" onclick="showInlineReplyForm('${commentId}', this, event)">Reply</button>
+                    ${editActionHTML}
+                    <button class="heart-react-btn ${hasLikedMain}" onclick="likeCommentNode('${commentId}', this, event)"><i class="fas fa-heart"></i> <span>${mainHearts}</span></button>
+                    ${pinActionHTML}
+                    ${deleteActionHTML}
+                </div>
+                <div class="replies-box">${repliesHTML}</div>
+            `;
+            container.appendChild(nodeDiv);
+        }
+    });
+}
+
+window.likeCommentNode = function(commentId, buttonEl, e) {
+    if(e) e.stopPropagation();
+    if(localStorage.getItem(`liked_${commentId}`)) return; 
+    localStorage.setItem(`liked_${commentId}`, 'true');
+    buttonEl.classList.add('liked');
+    database.ref('game_chats/' + id + '/' + commentId + '/hearts').transaction(h => (h || 0) + 1);
+};
+
+window.likeReplyNode = function(commentId, replyId, buttonEl, e) {
+    if(e) e.stopPropagation();
+    if(localStorage.getItem(`liked_${commentId}_${replyId}`)) return;
+    localStorage.setItem(`liked_${commentId}_${replyId}`, 'true');
+    buttonEl.classList.add('liked');
+    database.ref('game_chats/' + id + '/' + commentId + '/replies/' + replyId + '/hearts').transaction(h => (h || 0) + 1);
+};
+
+window.togglePinCommentNode = function(commentId, e) {
+    if(e) e.stopPropagation();
+    if(!isAdminAuthenticated) return; 
+
+    pinRef.get().then((snapshot) => {
+        const currentPin = snapshot.val();
+        if(currentPin && currentPin.commentId === commentId) {
+            pinRef.remove();
+        } else {
+            pinRef.set({ 
+                commentId: commentId, 
+                timestamp: firebase.database.ServerValue.TIMESTAMP 
             });
         }
-        window.postMainThread = postMainThread;
+    });
+};
 
-        function triggerCommentRender() {
-            if(!chatRef) return;
+window.deleteCommentNode = function(commentId, e) {
+    if(e) e.stopPropagation();
+    database.ref('game_chats/' + id + '/' + commentId).get().then((snap) => {
+        const nodeData = snap.val();
+        if(!nodeData) return;
+        const isMyComment = localStorage.getItem('my_comment_' + commentId) === 'true';
+        if (!isAdminAuthenticated && nodeData.role === 'Admin') return;
+        if (!isAdminAuthenticated && !isMyComment) return;
+
+        if(confirm("Delete this thread permanently?")) {
+            if(commentId === globalPinnedId) pinRef.remove();
+            database.ref('game_chats/' + id + '/' + commentId).remove().then(() => {
+                localStorage.removeItem('my_comment_' + commentId);
+            });
+        }
+    });
+};
+
+window.deleteReplyNode = function(commentId, replyId, e) {
+    if(e) e.stopPropagation();
+    database.ref('game_chats/' + id + '/' + commentId + '/replies/' + replyId).get().then((snap) => {
+        const repData = snap.val();
+        if(!repData) return;
+        const isMyReply = localStorage.getItem('my_reply_' + replyId) === 'true';
+        if (!isAdminAuthenticated && repData.role === 'Admin') return;
+        if (!isAdminAuthenticated && !isMyReply) return;
+
+        if(confirm("Delete this reply?")) {
+            database.ref('game_chats/' + id + '/' + commentId + '/replies/' + replyId).remove().then(() => {
+                localStorage.removeItem('my_reply_' + replyId);
+            });
+        }
+    });
+};
+
+window.editCommentNode = function(commentId, currentMsg, e) {
+    if(e) e.stopPropagation();
+    const isMyComment = localStorage.getItem('my_comment_' + commentId) === 'true';
+    if(!isMyComment && !isAdminAuthenticated) return;
+
+    const newMsg = prompt("Edit comment text:", currentMsg);
+    if(newMsg && newMsg.trim() !== "") {
+        database.ref('game_chats/' + id + '/' + commentId).update({ message: newMsg.trim() });
+    }
+};
+
+window.editReplyNode = function(commentId, replyId, currentMsg, e) {
+    if(e) e.stopPropagation();
+    const isMyReply = localStorage.getItem('my_reply_' + replyId) === 'true';
+    if(!isMyReply && !isAdminAuthenticated) return;
+
+    const newMsg = prompt("Edit reply text:", currentMsg);
+    if(newMsg && newMsg.trim() !== "") {
+        database.ref('game_chats/' + id + '/' + commentId + '/replies/' + replyId).update({ message: newMsg.trim() });
+    }
+};
+
+window.showInlineReplyForm = function(parentId, buttonEl, e) {
+    if(e) e.stopPropagation();
+    const parentDiv = buttonEl.parentElement;
+    if(parentDiv.nextElementSibling && parentDiv.nextElementSibling.classList.contains('nested-form')) return;
+
+    const form = document.createElement('div');
+    form.classList.add('nested-form');
+    form.onclick = function(ev) { ev.stopPropagation(); }; 
+    form.innerHTML = `
+        <div class="nested-form-row">
+            <select class="rep-role">
+                <option value="User">👤 User</option>
+                <option value="Admin">🛡️ Admin</option>
+            </select>
+        </div>
+        <textarea class="chat-textarea rep-msg" rows="2" placeholder="Write a reply directly below..."></textarea>
+        <div class="nested-form-row" style="margin-top:4px;">
+            <div></div>
+            <div class="nested-actions">
+                <button class="nested-cancel" onclick="event.stopPropagation(); this.closest('.nested-form').remove()">Cancel</button>
+                <button class="nested-submit" onclick="submitInlineReply('${parentId}', this, event)">Reply</button>
+            </div>
+        </div>
+    `;
+    
+    const repRoleSel = form.querySelector('.rep-role');
+    if(isAdminAuthenticated) {
+        repRoleSel.value = 'Admin';
+    } else {
+        repRoleSel.value = 'User';
+    }
+
+    repRoleSel.onchange = function() {
+        if(this.value === 'Admin') {
+            if(!isAdminAuthenticated) {
+                const password = prompt("Enter Admin Security Password:");
+                if(password === ADMIN_SECRET_KEY) {
+                    isAdminAuthenticated = true;
+                    if(postRoleSelect) postRoleSelect.value = 'Admin';
+                } else {
+                    alert("Wrong Password!");
+                    this.value = 'User';
+                }
+            }
+        }
+    };
+
+    parentDiv.after(form);
+};
+
+window.submitInlineReply = function(parentId, buttonEl, e) {
+    if(e) e.stopPropagation();
+    const form = buttonEl.closest('.nested-form');
+    const role = form.querySelector('.rep-role').value;
+    const text = form.querySelector('.rep-msg').value.trim();
+    if(text === "") return;
+
+    if(role === 'Admin' && !isAdminAuthenticated) return;
+
+    let finalName = "Admin";
+    let isUserRep = false;
+    if(role !== 'Admin') {
+        finalName = getOrSetUserNickname();
+        isUserRep = true;
+    }
+
+    const newReplyRef = database.ref('game_chats/' + id + '/' + parentId + '/replies').push();
+    const replyId = newReplyRef.key;
+
+    if(isUserRep) {
+        localStorage.setItem('my_reply_' + replyId, 'true');
+    }
+
+    newReplyRef.set({
+        username: finalName,
+        role: role,
+        message: text,
+        hearts: 0,
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+    }, (err) => {
+        if(!err) {
             chatRef.get().then((snapshot) => { renderComments(snapshot.val()); });
         }
+    });
+    form.remove();
+};
 
-        function renderComments(data) {
-            const container = document.getElementById('chatThreadsContainer');
-            if(!container) return;
-            container.innerHTML = "";
+getOrSetUserNickname();
+        
             
-            if(!data) {
-                container.innerHTML = `<p style="font-size:0.75rem; color:#8e99ab; text-align:center; padding:10px;">No reviews yet.</p>`;
-                return;
-            }
+         // --- RECOMMENDED SECTION (SORTED BY DOWNLOADS) ---
+const recContainer = document.getElementById('recommendedContainer');
+async function loadRecommended() {
+    let sortedList = [];
+    // 1. Paila sabai game ko download count fetch garne
+    const promises = Object.keys(gameData).map(async (key) => {
+        const snapshot = await database.ref('downloads/' + key).get();
+        return { key, count: snapshot.val() || 0, ...gameData[key] };
+    });
 
-            // Pin algorithm sorting layout rule
-            const sortedKeys = Object.keys(data).sort((a, b) => {
-                const aIsPinned = (data[a].message === globalPinnedMessage) ? 1 : 0;
-                const bIsPinned = (data[b].message === globalPinnedMessage) ? 1 : 0;
-                
-                if (aIsPinned !== bIsPinned) {
-                    return bIsPinned - aIsPinned; 
-                }
-                return data[b].timestamp - data[a].timestamp; 
-            });
+    const results = await Promise.all(promises);
 
-            sortedKeys.forEach(commentId => {
-                const node = data[commentId];
-                if(node.message) { 
-                    const nodeDiv = document.createElement('div');
-                    nodeDiv.classList.add('comment-node');
-                    
-                    const isCurrentNodePinned = (node.message === globalPinnedMessage);
-                    if(isCurrentNodePinned) {
-                        nodeDiv.classList.add('is-pinned-style'); 
-                    }
-                    
-                    let repliesHTML = "";
-                    if(node.replies) {
-                        Object.keys(node.replies).sort((a,b) => node.replies[a].timestamp - node.replies[b].timestamp).forEach(rId => {
-                            const rep = node.replies[rId];
-                            const badge = rep.role === 'Admin' ? 'badge-admin' : 'badge-user';
-                            const rHearts = rep.hearts || 0;
-                            
-                            // SUB4UNLOCK rule checks if it belongs to current user or admin status
-                            const isMyReply = localStorage.getItem('my_reply_' + rId) === 'true';
-                            let rDeleteBtn = "";
-                            if(isAdminAuthenticated || isMyReply) {
-                                rDeleteBtn = `<button class="delete-trigger-btn" style="margin-left:8px; color:#ff4d4d60;" onclick="deleteReplyNode('${commentId}','${rId}', event)"><i class="fas fa-trash"></i></button>`;
-                            }
+    // 2. High count vako lai mathi rakhna Sort garne
+    sortedList = results.sort((a, b) => b.count - a.count);
 
-                            const hasLikedReply = localStorage.getItem(`liked_${commentId}_${rId}`) ? 'liked' : '';
-
-                            repliesHTML += `
-                                <div class="comment-node" style="border-left-color: rgba(255,77,77,0.3); margin-top: 5px;">
-                                    <div class="comment-meta">
-                                        <div class="meta-left"><span class="${badge}">${rep.role.toUpperCase()}</span></div>
-                                        <div>${rDeleteBtn}</div>
-                                    </div>
-                                    <div class="comment-text">${rep.message}</div>
-                                    <div class="node-actions" style="margin-top:4px;">
-                                        <button class="reply-trigger-btn" onclick="showInlineReplyForm('${commentId}', this, event)">Reply</button>
-                                        <button class="heart-react-btn ${hasLikedReply}" onclick="likeReplyNode('${commentId}','${rId}', this, event)"><i class="fas fa-heart"></i> <span>${rHearts}</span></button>
-                                    </div>
-                                </div>`;
-                        });
-                    }
-
-                    const mainBadge = node.role === 'Admin' ? 'badge-admin' : 'badge-user';
-                    const mainHearts = node.hearts || 0;
-                    
-                    // SUB4UNLOCK filter data layer check: Show delete action button if Admin OR if it's their own comment
-                    const isMyComment = localStorage.getItem('my_comment_' + commentId) === 'true';
-                    let deleteActionHTML = "";
-                    if(isAdminAuthenticated || isMyComment) {
-                        deleteActionHTML = `<button class="delete-trigger-btn" onclick="deleteCommentNode('${commentId}', event)"><i class="fas fa-trash"></i> Delete</button>`;
-                    }
-
-                    const safeMsg = node.message.replace(/'/g, "\\'").replace(/"/g, '\\"');
-                    const pinButtonLabel = isCurrentNodePinned ? `<i class="fas fa-thumbtack" style="color:#ffcc00;"></i> Unpin` : `<i class="fas fa-thumbtack"></i> Pin`;
-                    const pinActionHTML = `<button class="pin-trigger-btn" onclick="togglePinCommentNode('${safeMsg}', event)">${pinButtonLabel}</button>`;
-
-                    const pinBadgeTagHTML = isCurrentNodePinned ? `<span class="tag-pinned"><i class="fas fa-thumbtack"></i> PINNED</span>` : '';
-
-                    const safeMsgAll = node.message.replace(/'/g, "\\'").replace(/"/g, '\\"');
-                    const hasLikedMain = localStorage.getItem(`liked_${commentId}`) ? 'liked' : '';
-
-                    nodeDiv.innerHTML = `
-                        <div class="comment-meta">
-                            <div class="meta-left">
-                                <span class="${mainBadge}">${node.role.toUpperCase()}</span>
-                                <span class="tag-issue">${node.tag}</span>
-                                ${pinBadgeTagHTML}
+    // 3. Current page ko game bahek aru lai UI ma dekhau-ne
+    recContainer.innerHTML = ""; // Container clear garne
+    sortedList.forEach(item => {
+        if(item.key !== id) {
+            const countId = `count-${item.key}`;
+            
+            recContainer.innerHTML += `
+                <a href="?id=${item.key}" class="recommend-item">
+                    <img src="${item.img}" class="recommend-thumb">
+                    <div class="recommend-info">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                            <h3 style="font-size: 0.9rem; font-weight: 700; margin: 0;">${item.name}</h3>
+                            <span style="background: rgba(255, 77, 77, 0.15); color: #ff4d4d; font-size: 0.55rem; font-weight: 900; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid rgba(255, 77, 77, 0.3);">
+                                Mod Menu
+                            </span>
+                        </div>
+                        
+                        <div class="meta-row" style="margin: 0; padding: 0; display: flex; gap: 12px; color: #8e99ab;">
+                            <div style="font-size: 0.72rem; font-weight: 600;">
+                                <i class="fas fa-code-branch" style="font-size: 0.65rem; color: #ff4d4d;"></i> v${item.version}
+                            </div>
+                            <div style="font-size: 0.72rem; font-weight: 600;">
+                                <i class="fas fa-download" style="font-size: 0.65rem; color: #ff4d4d;"></i> 
+                                <span id="${countId}">${item.count.toLocaleString()}</span>
                             </div>
                         </div>
-                        <div class="comment-text" id="text-${commentId}">${node.message}</div>
-                        <div class="node-actions">
-                            <button class="reply-trigger-btn" onclick="showInlineReplyForm('${commentId}', this, event)">Reply</button>
-                            <button class="edit-trigger-btn" onclick="editCommentNode('${commentId}','${safeMsgAll}', event)"><i class="fas fa-edit"></i> Edit</button>
-                            <button class="heart-react-btn ${hasLikedMain}" onclick="likeCommentNode('${commentId}', this, event)"><i class="fas fa-heart"></i> <span>${mainHearts}</span></button>
-                            ${pinActionHTML}
-                            ${deleteActionHTML}
-                        </div>
-                        <div class="replies-box">${repliesHTML}</div>
-                    `;
-                    container.appendChild(nodeDiv);
-                }
-            });
-        }
-
-        window.likeCommentNode = function(commentId, buttonEl, e) {
-            if(e) e.stopPropagation();
-            if(localStorage.getItem(`liked_${commentId}`)) return; 
-            
-            localStorage.setItem(`liked_${commentId}`, 'true');
-            buttonEl.classList.add('liked');
-            database.ref('game_chats/' + id + '/' + commentId + '/hearts').transaction(h => (h || 0) + 1);
-        };
-
-        window.likeReplyNode = function(commentId, replyId, buttonEl, e) {
-            if(e) e.stopPropagation();
-            if(localStorage.getItem(`liked_${commentId}_${replyId}`)) return;
-
-            localStorage.setItem(`liked_${commentId}_${replyId}`, 'true');
-            buttonEl.classList.add('liked');
-            database.ref('game_chats/' + id + '/' + commentId + '/replies/' + replyId + '/hearts').transaction(h => (h || 0) + 1);
-        };
-
-        // --- PASSWORD SECURED TOGGLE PIN/UNPIN SYSTEM ---
-        window.togglePinCommentNode = function(messageContent, e) {
-            if(e) e.stopPropagation();
-            
-            if(!isAdminAuthenticated) {
-                const password = prompt("Security Action: Enter Admin Password to modify PIN status:");
-                if(password === ADMIN_SECRET_KEY) {
-                    isAdminAuthenticated = true;
-                    const postRoleSelect = document.getElementById('postRole');
-                    if(postRoleSelect) postRoleSelect.value = 'Admin';
-                } else {
-                    alert("Authentication Failed! Security Action Denied.");
-                    return;
-                }
-            }
-
-            pinRef.get().then((snapshot) => {
-                const currentPin = snapshot.val();
-                if(currentPin && currentPin.message === messageContent) {
-                    pinRef.remove().then(() => {
-                        alert("Thread successfully Unpinned!");
-                    });
-                } else {
-                    pinRef.set({ 
-                        message: messageContent, 
-                        timestamp: firebase.database.ServerValue.TIMESTAMP 
-                    }).then(() => {
-                        alert("Thread successfully Pinned to top side!");
-                    });
-                }
-            });
-        };
-
-        // --- FIX SMART DELETE LOGIC (NO PASSWORD FOR OWN COMMENT) ---
-        window.deleteCommentNode = function(commentId, e) {
-            if(e) e.stopPropagation();
-            
-            const isMyComment = localStorage.getItem('my_comment_' + commentId) === 'true';
-
-            // Admin verify process occurs ONLY if user is trying to delete someone else's comment
-            if (!isMyComment && !isAdminAuthenticated) {
-                const password = prompt("Security Action: Enter Admin Password to delete this thread:");
-                if(password === ADMIN_SECRET_KEY) {
-                    isAdminAuthenticated = true;
-                    const postRoleSelect = document.getElementById('postRole');
-                    if(postRoleSelect) postRoleSelect.value = 'Admin';
-                } else {
-                    alert("Wrong Password! Action Denied.");
-                    return;
-                }
-            }
-
-            if(confirm("Delete this thread permanently?")) {
-                database.ref('game_chats/' + id + '/' + commentId).remove().then(() => {
-                    localStorage.removeItem('my_comment_' + commentId);
-                });
-            }
-        };
-
-        window.deleteReplyNode = function(commentId, replyId, e) {
-            if(e) e.stopPropagation();
-            
-            const isMyReply = localStorage.getItem('my_reply_' + replyId) === 'true';
-
-            if (!isMyReply && !isAdminAuthenticated) {
-                const password = prompt("Security Action: Enter Admin Password to delete this reply:");
-                if(password === ADMIN_SECRET_KEY) {
-                    isAdminAuthenticated = true;
-                    const postRoleSelect = document.getElementById('postRole');
-                    if(postRoleSelect) postRoleSelect.value = 'Admin';
-                } else {
-                    alert("Wrong Password! Action Denied.");
-                    return;
-                }
-            }
-
-            if(confirm("Delete this reply?")) {
-                database.ref('game_chats/' + id + '/' + commentId + '/replies/' + replyId).remove().then(() => {
-                    localStorage.removeItem('my_reply_' + replyId);
-                });
-            }
-        };
-
-        window.editCommentNode = function(commentId, currentMsg, e) {
-            if(e) e.stopPropagation();
-            
-            const isMyComment = localStorage.getItem('my_comment_' + commentId) === 'true';
-            if(!isMyComment && !isAdminAuthenticated) {
-                alert("You can only edit your own comments!");
-                return;
-            }
-
-            const newMsg = prompt("Edit comment text:", currentMsg);
-            if(newMsg && newMsg.trim() !== "") {
-                database.ref('game_chats/' + id + '/' + commentId).update({
-                    message: newMsg.trim()
-                });
-            }
-        };
-
-        window.showInlineReplyForm = function(parentId, buttonEl, e) {
-            if(e) e.stopPropagation();
-            const parentDiv = buttonEl.parentElement;
-            if(parentDiv.nextElementSibling && parentDiv.nextElementSibling.classList.contains('nested-form')) return;
-
-            const form = document.createElement('div');
-            form.classList.add('nested-form');
-            form.onclick = function(ev) { ev.stopPropagation(); }; 
-            form.innerHTML = `
-                <div class="nested-form-row">
-                    <select class="rep-role">
-                        <option value="User">👤 User</option>
-                        <option value="Admin">🛡️ Admin</option>
-                    </select>
-                </div>
-                <textarea class="chat-textarea rep-msg" rows="2" placeholder="Write a reply directly below..."></textarea>
-                <div class="nested-form-row" style="margin-top:4px;">
-                    <div></div>
-                    <div class="nested-actions">
-                        <button class="nested-cancel" onclick="event.stopPropagation(); this.closest('.nested-form').remove()">Cancel</button>
-                        <button class="nested-submit" onclick="submitInlineReply('${parentId}', this, event)">Reply</button>
                     </div>
-                </div>
-            `;
-            parentDiv.after(form);
-        };
+                </a>`;
 
-        window.submitInlineReply = function(parentId, buttonEl, e) {
-            if(e) e.stopPropagation();
-            const form = buttonEl.closest('.nested-form');
-            const role = form.querySelector('.rep-role').value;
-            const text = form.querySelector('.rep-msg').value.trim();
-            if(text === "") return;
-
-            if(role === 'Admin' && !isAdminAuthenticated) {
-                const password = prompt("Enter Admin Security Password:");
-                if(password === ADMIN_SECRET_KEY) isAdminAuthenticated = true;
-                else { alert("Wrong Password!"); return; }
-            }
-
-            const newReplyRef = database.ref('game_chats/' + id + '/' + parentId + '/replies').push();
-            const replyId = newReplyRef.key;
-
-            newReplyRef.set({
-                role: role,
-                message: text,
-                hearts: 0,
-                timestamp: firebase.database.ServerValue.TIMESTAMP
-            }, (err) => {
-                if(!err) {
-                    localStorage.setItem('my_reply_' + replyId, 'true');
-                }
-            });
-            form.remove();
-        };
-
-        // --- RECOMMENDED ---
-        const recContainer = document.getElementById('recommendedContainer');
-        async function loadRecommended() {
-            let sortedList = [];
-            const promises = Object.keys(gameData).map(async (key) => {
-                const snapshot = await database.ref('downloads/' + key).get();
-                return { key, count: snapshot.val() || 0, ...gameData[key] };
-            });
-            const results = await Promise.all(promises);
-            sortedList = results.sort((a, b) => b.count - a.count);
-
-            recContainer.innerHTML = ""; 
-            sortedList.forEach(item => {
-                if(item.key !== id) {
-                    const countId = `count-${item.key}`;
-                    recContainer.innerHTML += `
-                        <a href="?id=${item.key}" class="recommend-item">
-                            <img src="${item.img}" class="recommend-thumb">
-                            <div class="recommend-info">
-                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                                    <h3 style="font-size: 0.9rem; font-weight: 700; margin: 0;">${item.name}</h3>
-                                    <span style="background: rgba(255, 77, 77, 0.15); color: #ff4d4d; font-size: 0.55rem; font-weight: 900; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid rgba(255, 77, 77, 0.3);">Mod Menu</span>
-                                </div>
-                                <div class="meta-row" style="margin: 0; padding: 0; display: flex; gap: 12px; color: #8e99ab;">
-                                    <div style="font-size: 0.72rem; font-weight: 600;"><i class="fas fa-code-branch" style="font-size: 0.65rem; color: #ff4d4d;"></i> v${item.version}</div>
-                                    <div style="font-size: 0.72rem; font-weight: 600;"><i class="fas fa-download" style="font-size: 0.65rem; color: #ff4d4d;"></i> <span id="${countId}">${item.count.toLocaleString()}</span></div>
-                                </div>
-                            </div>
-                        </a>`;
-                    database.ref('downloads/' + item.key).on('value', (s) => {
-                        const el = document.getElementById(countId);
-                        if(el) el.innerText = (s.val() || 0).toLocaleString();
-                    });
-                }
+            // Real-time update ko lagi listener
+            database.ref('downloads/' + item.key).on('value', (s) => {
+                const el = document.getElementById(countId);
+                if(el) el.innerText = (s.val() || 0).toLocaleString();
             });
         }
-        loadRecommended();
+    });
+}
 
-        // --- LINK LOCK OVERLAYS ---
+// Function call garne
+loadRecommended();
+
+        // --- SUB4UNLOCK TRIGGER ---
+                // --- SUB4UNLOCK TRIGGER & ONE-TIME UNLOCK LOGIC ---
         const lockOverlay = document.getElementById('lockOverlay');
+
         const openLock = (e) => {
             e.preventDefault();
-            const btn = document.getElementById('mainDownloadBtn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Wait...';
-            btn.style.pointerEvents = "none"; 
-            btn.style.opacity = "0.8";
+        const btn = document.getElementById('mainDownloadBtn');
+    const originalText = btn.innerHTML;
 
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.style.pointerEvents = "auto";
-                btn.style.opacity = "1";
-                if (localStorage.getItem('zyrox_verified') === 'true') {
-                    database.ref('downloads/' + id).transaction(c => (c || 0) + 1);
-                    window.location.href = game.dl;
-                    return;
-                }
-                lockOverlay.style.display = 'flex';
-                history.pushState({modalOpen: true}, null, "");
-            }, 2000);
+    // 1. Loading State Dekhaune (2 Seconds)
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Wait...';
+    btn.style.pointerEvents = "none"; // Double click rokna
+    btn.style.opacity = "0.8";
+
+    setTimeout(() => {
+        // 2-second pachi reset garne
+        btn.innerHTML = originalText;
+        btn.style.pointerEvents = "auto";
+        btn.style.opacity = "1";
+        
+            // 1. Yadi PAILA NAI VERIFIED CHHA vane (Instant Redirect)
+            if (localStorage.getItem('zyrox_verified') === 'true') {
+                // Pahile Firebase update request pathai halne (Background ma)
+                database.ref('downloads/' + id).transaction(c => (c || 0) + 1);
+                
+                // Bina kunai delay direct redirect garne
+                window.location.href = game.dl;
+                return;
+            }
+
+            // 2. NAYA USER ko lagi: Lock overlay dekhaune
+            lockOverlay.style.display = 'flex';
+            history.pushState({modalOpen: true}, null, "");
+        }, 2000);
         };
 
         document.getElementById('mainDownloadBtn').onclick = openLock;
@@ -765,67 +1045,98 @@
         document.getElementById('videoTask').href = "https://youtube.com/watch?v=" + game.vid;
 
         window.onpopstate = function(event) {
-            if (lockOverlay.style.display === 'flex') lockOverlay.style.display = 'none';
+            if (lockOverlay.style.display === 'flex') {
+                lockOverlay.style.display = 'none';
+            }
         };
 
-        let status = { s1: false, s2: false, s3: false };
-        function updateSteps() {
-            const s2 = document.getElementById('s2-btn');
-            const s3 = document.getElementById('videoTask');
-            s2.classList.add('disabled');
-            s3.classList.add('disabled');
-            if (status.s1) s2.classList.remove('disabled');
-            if (status.s2) s3.classList.remove('disabled');
-        }
+// --- SUB4UNLOCK SEQUENTIAL LOGIC ---
+let status = { s1: false, s2: false, s3: false };
 
-        function setupTimerStep(btnId, iconId, key) {
-            const btn = document.getElementById(btnId);
-            const icon = document.getElementById(iconId);
-            btn.onclick = (e) => {
-                if (status[key]) return;
-                icon.className = "fas fa-spinner fa-spin";
-                setTimeout(() => {
-                    status[key] = true;
-                    btn.classList.add('done');
-                    icon.className = "fas fa-check-circle";
-                    updateSteps(); 
-                    checkVerification();
-                }, 5000);
-            };
-        }
+function updateSteps() {
+    const s1 = document.getElementById('s1-btn');
+    const s2 = document.getElementById('s2-btn');
+    const s3 = document.getElementById('videoTask');
 
-        setupTimerStep('s1-btn', 's1-icon', 's1');
-        setupTimerStep('s2-btn', 's2-icon', 's2');
-        setupTimerStep('videoTask', 's3-icon', 's3');
-        updateSteps(); 
+    // Default: S2 ra S3 lai lock garne
+    s2.classList.add('disabled');
+    s3.classList.add('disabled');
 
-        function checkVerification() {
-            if (status.s1 && status.s2 && status.s3) {
-                const fBtn = document.getElementById('finalUnlock');
-                fBtn.disabled = false;
-                fBtn.classList.add('active');
-                fBtn.innerText = "GET DOWNLOAD LINK NOW";
-            }
-        }
+    // Yedi S1 done bhayo bhane S2 kholne
+    if (status.s1) {
+        s2.classList.remove('disabled');
+    }
+    // Yedi S2 done bhayo bhane S3 kholne
+    if (status.s2) {
+        s3.classList.remove('disabled');
+    }
+}
 
+function setupTimerStep(btnId, iconId, key) {
+    const btn = document.getElementById(btnId);
+    const icon = document.getElementById(iconId);
+    
+    btn.onclick = (e) => {
+        if (status[key]) return;
+        
+        icon.className = "fas fa-spinner fa-spin";
+        
+        // 5 Second Timer
+        setTimeout(() => {
+            status[key] = true;
+            btn.classList.add('done');
+            icon.className = "fas fa-check-circle";
+            
+            updateSteps(); // Check garne kun task kholne
+            checkVerification();
+        }, 5000);
+    };
+}
+
+// Suru ma steps setup garne
+setupTimerStep('s1-btn', 's1-icon', 's1');
+setupTimerStep('s2-btn', 's2-icon', 's2');
+setupTimerStep('videoTask', 's3-icon', 's3');
+
+// First time load huda step lock garna
+updateSteps(); 
+
+function checkVerification() {
+    if (status.s1 && status.s2 && status.s3) {
+        const fBtn = document.getElementById('finalUnlock');
+        fBtn.disabled = false;
+        fBtn.classList.add('active');
+        fBtn.innerText = "GET DOWNLOAD LINK NOW";
+    }
+}
+        // NAYA USER ko lagi Final Unlock (Direct)
         document.getElementById('finalUnlock').onclick = () => {
             localStorage.setItem('zyrox_verified', 'true');
             database.ref('downloads/' + id).transaction(c => (c || 0) + 1);
             window.location.href = game.dl;
         };
 
+        // --- DISPLAY COUNT LOGIC (Strict 3s Delay) ---
         database.ref('downloads/' + id).on('value', (s) => {
             const latestCount = (s.val() || 0).toLocaleString();
+            
+            // UI ma 3 second pachi matrai update garne
             setTimeout(() => {
                 const countElement = document.getElementById('downloadCount');
-                if (countElement) countElement.innerText = latestCount;
+                if (countElement) {
+                    countElement.innerText = latestCount;
+                }
             }, 3000); 
         });
+
     } else {
         window.location.href = "index.html";
     }
+
+
 </script>
-<script>(function(s){s.dataset.zone='10546845',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script>(function(s){s.dataset.zone='10546845',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <script>(function(s){s.dataset.zone='10546863',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+        
 </body>
 </html>
