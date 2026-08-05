@@ -418,52 +418,7 @@
     </div>
 </div>
        
-<!-- Report Bug Card -->
-       <div class="accordion-wrapper" id="chatAccordion">
-    <div class="accordion-trigger" onclick="toggleAccordion('chatAccordion')">
-        <div class="accordion-main">
-            <div class="icon-box" style="color: #34c759;"><i class="fas fa-comments"></i></div>
-            <div class="card-text">
-                <h3>Report Bug & Chat</h3>
-                <p>Ask doubts or report bugs regarding this game.</p>
-            </div>
-        </div>
-        <div class="chevron-icon"><i class="fas fa-chevron-down"></i></div>
-    </div>
-    <div class="accordion-content">
-        <div class="chat-layout-box">
-            
-            <div class="chat-input-wrapper">
-                <div class="chat-control-row">
-                    <div class="user-name-badge">
-                        <i class="fas fa-user" style="color:#34c759;"></i>
-                        <span id="displayNick">Guest</span>
-                        <span class="name-edit-trigger" onclick="forceChangeName(event)">(Edit)</span>
-                    </div>
-                    <select id="mainIssue">
-                        <option value="General">💬 General Enquiry</option>
-                        <option value="Mod Crash">💥 Menu Crashing</option>
-                        <option value="Auth Error">🔑 Key/Auth Error</option>
-                        <option value="Not Working">⚙️ Mod Not Working</option>
-                    </select>
-                    <select id="postRole">
-                        <option value="User">👤 User</option>
-                        <option value="Admin">🛡️ Admin</option>
-                    </select>
-                </div>
-                <textarea id="mainChatInput" class="chat-textarea" rows="2" placeholder="Type your comment or info here..."></textarea>
-                <div class="chat-control-row" style="margin-top:4px; justify-content: flex-end; overflow:hidden;">
-                    <button class="chat-post-btn" onclick="postMainThread(event)">Post Thread</button>
-                </div>
-            </div>
 
-            <div class="threads-root" id="chatThreadsContainer">
-                <p style="font-size:0.75rem; color:#8e99ab; text-align:center;">Loading discussion threads...</p>
-            </div>
-
-        </div>
-    </div>
-       </div>
        
 
    </div>
