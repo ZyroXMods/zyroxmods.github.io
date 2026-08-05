@@ -212,6 +212,27 @@
 .nested-actions { display: flex; gap: 6px; }
 .nested-cancel { background: none; border: none; color: #8e99ab; font-size: 0.7rem; cursor: pointer; }
 .nested-submit { background: #34c759; color: #fff; border: none; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; cursor: pointer; }
+
+/* --- MOD FEATURES LIST STYLE --- */
+.features-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+
+.feature-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    font-size: 0.78rem; 
+    color: #e2e8f0; 
+}
+
+.feature-item i { 
+    color: #34c759; 
+    font-size: 0.85rem; 
+}
+        
         
         /* RECOMMENDED LIST */
         .recommend-section { padding: 0 20px 30px; }
@@ -379,6 +400,26 @@
            </div>
        </div>
 
+       <!-- Mod Features Accordion -->
+<div class="accordion-wrapper" id="modFeaturesAccordion">
+    <div class="accordion-trigger">
+        <div class="accordion-main">
+            <div class="icon-box" style="color: #34c759;"><i class="fas fa-star"></i></div>
+            <div class="card-text">
+                <h3>Mod Features Included</h3>
+                <p>Click to check features included in this mod.</p>
+            </div>
+        </div>
+        <div class="chevron-icon"><i class="fas fa-chevron-down"></i></div>
+    </div>
+    <div class="accordion-content">
+        <div class="features-list" id="featuresContainer">
+            <!-- Dynamic Features List render hune UI container -->
+        </div>
+    </div>
+</div>
+       
+
        <!-- Report Bug Card -->
        <div class="accordion-wrapper" id="chatAccordion">
     <div class="accordion-trigger" onclick="toggleAccordion('chatAccordion')">
@@ -508,7 +549,20 @@
         document.getElementById('video').src = "https://www.youtube.com/embed/" + game.vid;
         document.title = game.name + " | ZyroX Mods";
 
-               // --- ACCORDION TOGGLE LOGIC FIXED ---
+        // Features items lai dynamically map/render garne code:
+const featBox = document.getElementById('featuresContainer');
+if(game.features && game.features.length > 0) {
+    featBox.innerHTML = game.features.map(f => `
+        <div class="feature-item"><i class="fas fa-check-circle"></i> ${f}</div>
+    `).join('');
+} else {
+    featBox.innerHTML = `<div class="feature-item"><i class="fas fa-check-circle"></i> Full Mod Menu Enabled</div>`;
+}
+
+// Mod features accordion toggle activate garne code:
+setupAccordion('modFeaturesAccordion');
+            
+            // --- ACCORDION TOGGLE LOGIC FIXED ---
         // How To Use Accordion Click Listener
         const howToUse = document.getElementById('howToUseAccordion');
         if(howToUse) {
