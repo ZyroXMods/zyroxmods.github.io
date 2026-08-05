@@ -150,7 +150,25 @@
     font-size: 0.65rem; 
 }
         
+/* --- MOD FEATURES LIST STYLE --- */
+.features-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
 
+.feature-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    font-size: 0.78rem; 
+    color: #e2e8f0; 
+}
+
+.feature-item i { 
+    color: #34c759; 
+    font-size: 0.85rem; 
+}
         /* RECOMMENDED LIST */
         .recommend-section { padding: 0 20px 30px; }
         .recommend-item { display: flex; align-items: center; gap: 15px; text-decoration: none; color: #fff; margin-bottom: 18px; transition: 0.2s; }
@@ -246,6 +264,9 @@
                     <div class="meta-item">
                         <i id="catIcon" class="fas fa-gamepad"></i> <span id="category">Games</span>
                     </div>
+                     <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i> <span id="updatedDate">Recently</span>
+                     </div>
                     <div class="meta-item">
                         <i class="fas fa-download"></i> <span id="downloadCount">0</span>
                     </div>
@@ -380,7 +401,8 @@
     const database = firebase.database();
 
     const gameData = {
-        "frag": { name: "Frag Pro Shooter", version: "5.1.0", type: "Action", c_icon: "fa-gun", img: "frag.png", vid: "qkKXWNyS3p4", dl: "https://modsfire.com/a7It8x011e045W4" },
+        "frag": { name: "Frag Pro Shooter", version: "5.1.0", type: "Action", c_icon: "fa-gun", img: "frag.png", vid: "qkKXWNyS3p4", dl: "https://modsfire.com/a7It8x011e045W4", updated: "2026-04-10",
+        features: ["MOD Menu", "Unlimited Money & Diamonds", "God Mode / High Damage", "Anti-Ban Protection"] },
         "dude": { name: "Dude Theft Wars", version: "0.9.1.0b", type: "Action", c_icon: "fa-gun", img: "dude.png", vid: "4Uf04YFu52s", dl: "https://modsfire.com/GHamiq5o6q7S0UH" },
         "pvz": { name: "PVZ Fusion EG", version: "3.6.1", type: "Arcade", c_icon: "fa-gamepad", img: "pvz.png", vid: "another_vid", dl: "https://modsfire.com/G6ENV0m0uFinki1" },
         "stick": { name: "Stick War Legacy", version: "2026.1.467", type: "Arcade", c_icon: "fa-gamepad", img: "stick.png", vid: "PTp3_zpNxwQ", dl: "https://modsfire.com/XRj9n0AnZ6tdg3k" },
@@ -398,10 +420,21 @@
         document.getElementById('version').innerText = "v" + game.version;
         document.getElementById('category').innerText = game.type;
         document.getElementById('catIcon').className = "fas " + game.c_icon;
+        document.getElementById('updatedDate').innerText = game.updated ? game.updated : "Recently";
         document.getElementById('video').src = "https://www.youtube.com/embed/" + game.vid;
         document.title = game.name + " | ZyroX Mods";
 
-            const accordion = document.getElementById('howToUseAccordion');
+        // Features items lai dynamically map/render garne code:
+const featBox = document.getElementById('featuresContainer');
+if(game.features && game.features.length > 0) {
+    featBox.innerHTML = game.features.map(f => `
+        <div class="feature-item"><i class="fas fa-check-circle"></i> ${f}</div>
+    `).join('');
+} else {
+    featBox.innerHTML = `<div class="feature-item"><i class="fas fa-check-circle"></i> Full Mod Menu Enabled</div>`;
+}
+
+ const accordion = document.getElementById('howToUseAccordion');
    if(accordion) {
        accordion.onclick = () => {
            accordion.classList.toggle('open');
