@@ -445,42 +445,42 @@
         document.title = game.name + " | ZyroX Mods";
 
         // Features items lai dynamically map/render garne code:
+// १. Features Render गर्ने Logic
 const featBox = document.getElementById('featuresContainer');
-if(game.features && game.features.length > 0) {
-    featBox.innerHTML = game.features.map(f => `
-        <div class="feature-item"><i class="fas fa-check-circle"></i> ${f}</div>
-    `).join('');
-} else {
-    featBox.innerHTML = `<div class="feature-item"><i class="fas fa-check-circle"></i> Full Mod Menu Enabled</div>`;
+if (featBox) {
+    if (game && game.features && game.features.length > 0) {
+        featBox.innerHTML = game.features.map(f => `
+            <div class="feature-item"><i class="fas fa-check-circle"></i> ${f}</div>
+        `).join('');
+    } else {
+        featBox.innerHTML = `<div class="feature-item"><i class="fas fa-check-circle"></i> Full Mod Menu Enabled</div>`;
+    }
 }
 
- 
-// Accordion Handlers
-        const setupAccordion = (accId) => {
-            const acc = document.getElementById(accId);
-            if(acc) {
-                acc.onclick = () => acc.classList.toggle('open');
-            }
+// २. Single Clean Accordion Handler Function
+function setupAccordion(accId) {
+    const acc = document.getElementById(accId);
+    if (acc) {
+        // Purano onclick overwrite gari Single listener matra rakhchha
+        acc.onclick = (e) => {
+            e.stopPropagation();
+            acc.classList.toggle('open');
         };
+    }
+}
 
-        setupAccordion('howToUseAccordion');
-        setupAccordion('modFeaturesAccordion');
-               // --- ACCORDION TOGGLE LOGIC FIXED ---
-        // How To Use Accordion Click Listener
-        const howToUse = document.getElementById('howToUseAccordion');
-        if(howToUse) {
-            howToUse.onclick = () => {
-                howToUse.classList.toggle('open');
-            };
-        }
+// Accordions haru activate garne (Single call)
+setupAccordion('howToUseAccordion');
+setupAccordion('modFeaturesAccordion');
 
-        // Global function reference banako chat click handler ko lagi
-        window.toggleAccordion = function(accordionId) {
-            const acc = document.getElementById(accordionId);
-            if(acc) {
-                acc.classList.toggle('open');
-            }
-        };
+// ३. Global Function (Yedi HTML bata onclick="toggleAccordion('id')" use garnu parema)
+window.toggleAccordion = function(accordionId) {
+    const acc = document.getElementById(accordionId);
+    if (acc) {
+        acc.classList.toggle('open');
+    }
+};
+
          // --- RECOMMENDED SECTION (SORTED BY DOWNLOADS) ---
 const recContainer = document.getElementById('recommendedContainer');
 async function loadRecommended() {
