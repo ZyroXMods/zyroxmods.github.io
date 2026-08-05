@@ -265,7 +265,7 @@
                         <i id="catIcon" class="fas fa-gamepad"></i> <span id="category">Games</span>
                     </div>
                      <div class="meta-item">
-                        <i class="fas fa-calendar-alt"></i> <span id="updatedDate">Recently</span>
+                        <i class="fas fa-calendar-alt"></i> <span id="updatedDate">outdated</span>
                      </div>
                     <div class="meta-item">
                         <i class="fas fa-download"></i> <span id="downloadCount">0</span>
@@ -421,10 +421,10 @@
     const database = firebase.database();
 
     const gameData = {
-        "frag": { name: "Frag Pro Shooter", version: "5.1.0", type: "Action", c_icon: "fa-gun", img: "frag.png", vid: "qkKXWNyS3p4", dl: "https://modsfire.com/a7It8x011e045W", updated: "2026-04-1", 
+        "frag": { name: "Frag Pro Shooter", version: "5.1.0", type: "Action", c_icon: "fa-gun", img: "frag.png", vid: "qkKXWNyS3p4", dl: "https://modsfire.com/a7It8x011e045W4", updated: "2026-04-1", 
         features: ["MOD Menu", "Unlimited Money & Diamonds", "God Mode / High Damage", "Anti-Ban Protection"] },
         "dude": { name: "Dude Theft Wars", version: "0.9.1.0b", type: "Action", c_icon: "fa-gun", img: "dude.png", vid: "4Uf04YFu52s", dl: "https://modsfire.com/3j3BHNgo5W5IqvY", updated: "2026-04-1" },
-        "pvz": { name: "PVZ Fusion EG", version: "3.6.1", type: "Arcade", c_icon: "fa-gamepad", img: "pvz.png", vid: "another_vid", dl: "https://modsfire.com/G6ENV0m0uFinki1", updated: "2026-04-1" },
+        "pvz": { name: "PVZ Fusion EG", version: "3.6.1", type: "Arcade", c_icon: "fa-gamepad", img: "pvz.png", vid: "another_vid", dl: "https://modsfire.com/G6ENV0m0uFinki1" },
         "stick": { name: "Stick War Legacy", version: "2026.1.467", type: "Arcade", c_icon: "fa-gamepad", img: "stick.png", vid: "PTp3_zpNxwQ", dl: "https://modsfire.com/XRj9n0AnZ6tdg3k" },
         "die": { name: "Die Again", version: "1.2.4", type: "Arcade", c_icon: "fa-gamepad", img: "die.png", vid: "PjHuRxWqiTI", dl: "https://modsfire.com/JX7GccHTh731rGy" },
         "subway": { name: "Subway Surfers", version: "3.2.1", type: "Arcade", c_icon: "fa-gamepad", img: "subway.png", vid: "another_vid", dl: "wtf.html" }
@@ -458,7 +458,7 @@ if (lastSavedDl === null) {
         document.getElementById('category').innerText = game.type;
         document.getElementById('catIcon').className = "fas " + game.c_icon;
                 // Dynamic Auto Date or Default Date set garne
-        document.getElementById('updatedDate').innerText = autoUpdatedDate || game.updated || "Recently";
+        document.getElementById('updatedDate').innerText = autoUpdatedDate || game.updated || "outdated";
         document.getElementById('video').src = "https://www.youtube.com/embed/" + game.vid;
         document.title = game.name + " | ZyroX Mods";
 
