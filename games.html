@@ -567,7 +567,9 @@ if(game.features && game.features.length > 0) {
                 acc.onclick = () => acc.classList.toggle('open');
             }
         };
-            
+            setupAccordion('howToUseAccordion');
+        setupAccordion('modFeaturesAccordion');
+
             // --- ACCORDION TOGGLE LOGIC FIXED ---
         // How To Use Accordion Click Listener
         const howToUse = document.getElementById('howToUseAccordion');
