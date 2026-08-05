@@ -504,6 +504,7 @@
         document.getElementById('version').innerText = "v" + game.version;
         document.getElementById('category').innerText = game.type;
         document.getElementById('catIcon').className = "fas " + game.c_icon;
+        document.getElementById('updatedDate').innerText = game.updated ? game.updated : "Recently";
         document.getElementById('video').src = "https://www.youtube.com/embed/" + game.vid;
         document.title = game.name + " | ZyroX Mods";
 
