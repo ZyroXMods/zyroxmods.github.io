@@ -435,12 +435,26 @@
     const game = gameData[id];
 
         if(game) {
+           // --- DYNAMIC AUTO-DATE CHECK LOGIC ---
+        const savedDlKey = `saved_dl_${id}`;
+        const savedDateKey = `saved_date_${id}`;
+        const lastSavedDl = localStorage.getItem(savedDlKey);
+        let autoUpdatedDate = localStorage.getItem(savedDateKey);
+
+        // Yedi game/app ko Download Link (dl) naya/change vako vaye ajako Date set garne
+        if (lastSavedDl !== game.dl) {
+            const today = new Date().toISOString().split('T')[0];
+            localStorage.setItem(savedDlKey, game.dl);
+            localStorage.setItem(savedDateKey, today);
+            autoUpdatedDate = today;
+        }
         document.getElementById('name').innerText = game.name;
         document.getElementById('icon').src = game.img;
         document.getElementById('version').innerText = "v" + game.version;
         document.getElementById('category').innerText = game.type;
         document.getElementById('catIcon').className = "fas " + game.c_icon;
-        document.getElementById('updatedDate').innerText = game.updated ? game.updated : "Recently";
+                // Dynamic Auto Date or Default Date set garne
+        document.getElementById('updatedDate').innerText = autoUpdatedDate || game.updated || "Recently";
         document.getElementById('video').src = "https://www.youtube.com/embed/" + game.vid;
         document.title = game.name + " | ZyroX Mods";
 
